@@ -1,10 +1,18 @@
 # Prompt Bouncer
 
-Get a threat analysis for an incoming LLM Prompt
+Get a threat analysis for an incoming LLM Prompt.
 
 
 ![alt text](https://github.com/Prediction-by-Invention/promptbouncer/blob/main/doc/img/promptbouncer-logo-small.png)
 
+# Overview
+
+## Commercial License
+
+- Prompt Bouncer is not Open Source software, rather it is [Source Available software](https://en.wikipedia.org/wiki/Source-available_software). 
+- Prompt Bouncer is released under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/) which allows you to use the software for noncommercial purposes.
+- Please see the [License](#license)  section for more details.
+- For a commercial license, please visit our website at [https://promptbouncer.com](https://promptbouncer.com)
 
 
 # License
