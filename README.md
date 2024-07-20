@@ -7,21 +7,21 @@ Get a threat analysis for an incoming LLM Prompt.
 
 # Overview
 
-## Commercial License
+## Commercial or Non-Commercial Use?
 
 - Prompt Bouncer is not Open Source software, rather it is [Source Available software](https://en.wikipedia.org/wiki/Source-available_software). 
-- Prompt Bouncer is released under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/) which allows you to use the software for noncommercial purposes.
+- Prompt Bouncer is released under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/) which allows you to use the software for non-commercial purposes.
 - Please see the [License](#license)  section for more details.
 - For a commercial license, please visit our website at [https://promptbouncer.com](https://promptbouncer.com)
 
 
 # License
 
-Prompt Bouncer is not Open Source software, rather it is [Source Available software](https://en.wikipedia.org/wiki/Source-available_software).
+- Prompt Bouncer is not Open Source software, rather it is [Source Available software](https://en.wikipedia.org/wiki/Source-available_software).
+- Prompt Bouncer is released under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/) which allows you to use the software for noncommercial purposes.
+- This license encourages innovation and learning by allowing individuals and noncommercial organisations to use, modify, and distribute the software freely, which can foster a collaborative community. At the same time, it preserves the our right to commercialise our work or offer separate commercial licenses.
+- For a commercial license, please visit our website at [https://promptbouncer.com](https://promptbouncer.com)
 
-Prompt Bouncer is released under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/) which allows you to use the software for noncommercial purposes.
-
-This license encourages innovation and learning by allowing individuals and noncommercial organisations to use, modify, and distribute the software freely, which can foster a collaborative community. At the same time, it preserves the our right to commercialise our work or offer separate commercial licenses.
 
 ### Terms
 
