@@ -31,11 +31,11 @@ Get a threat analysis for an incoming LLM Prompt.
 - Notices: You must include these terms and any required notices from the licensor when distributing the software.
 - Changes and New Works License: You can modify the software and create new works from it.
 - Patent License: You get a patent license to use the software without infringing the licensor’s patents.
-- Noncommercial Purposes: The license is only for noncommercial use.
-- Personal Uses: Personal, noncommercial uses like research and hobbies are allowed.
-- Noncommercial Organizations: Nonprofits, educational, and government institutions can use the software non-commercially, regardless of funding.
+- Non-commercial Purposes: The license is only for non-commercial use.
+- Personal Uses: Personal, non-commercial uses like research and hobbies are allowed.
+- Non-commercial Organizations: Nonprofits, educational, and government institutions can use the software non-commercially, regardless of funding.
 - Fair Use: Legal fair use rights are not restricted by this license.
-- No Other Rights: You can’t transfer or sub-license your rights, and the licensor can grant licenses to others.
+- No Other Rights: You can’t transfer or sublicense your rights, and the licensor can grant licenses to others.
 - Patent Defence: If you claim the software infringes a patent, your patent license ends immediately.
 - Violations: If you violate the terms, your licenses can continue if you correct the violation within 32 days; otherwise, they end immediately.
 - No Liability: The software is provided as-is, without warranty, and the licensor isn’t liable for any damages.
