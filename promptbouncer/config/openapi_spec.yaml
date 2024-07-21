@@ -1,0 +1,88 @@
+openapi: 3.0.3
+info:
+  title: Prompt Bouncer REST API
+  description: Get a threat analysis for an incoming LLM Prompt.
+  version: 1.0.0
+externalDocs:
+  description: Prompt Bouncer Documentation
+  url: http://docs.promptbouncer.com/
+paths:
+  /v1/threat-assessment:
+    post:
+      summary: Perform a threat assessment
+      description: Accepts a threat assessment request and returns a threat assessment response.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThreatAssessmentRequest'
+      responses:
+        '200':
+          description: A successful threat assessment response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatAssessmentResponse'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Invalid input data."
+components:
+  schemas:
+    ThreatAssessmentRequest:
+      type: object
+      properties:
+        threat_scanners:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreatScanner'
+        prompt:
+          type: string
+          example: "Analyze potential threats based on the following criteria..."
+      required:
+        - prompt
+    ThreatAssessmentResponse:
+      type: object
+      properties:
+        threats:
+          type: array
+          items:
+            $ref: '#/components/schemas/Threat'
+        assessment_score:
+          type: number
+          format: float
+          example: 85.5
+        assessment_description:
+          type: string
+          example: "High risk due to multiple severe threats."
+    ThreatScanner:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Scanner A"
+        importance:
+          type: integer
+          example: 5
+        magnitude:
+          type: integer
+          example: 10
+    Threat:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Threat A"
+        importance:
+          type: integer
+          example: 7
+        magnitude:
+          type: integer
+          example: 9
