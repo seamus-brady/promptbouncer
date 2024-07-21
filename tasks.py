@@ -13,6 +13,7 @@ from invoke import task
 SRC_ROOT = "./promptbouncer/"
 TEST_ROOT = "./test/"
 
+
 @task
 def test(c):
     print("Running unit tests...")
@@ -55,7 +56,7 @@ def isort(c):
 
 
 @task
-def build(c):
+def checks(c):
     print("Running all checks...")
     isort(c)
     mypy(c)
@@ -64,4 +65,9 @@ def build(c):
     bandit(c)
     test(c)
 
+
+@task
+def api(c):
+    print("Running prod FastAPI server for Prompt Bouncer..")
+    c.run("cd promptbouncer; uvicorn main:app --port 10001")
 

@@ -1,7 +1,11 @@
 bandit
 black
+fastapi
 flake8
 invoke
 isort
 mypy
 python-dotenv
+starlette
+uvicorn
+types-PyYAML
