@@ -9,6 +9,7 @@ externalDocs:
 paths:
   /v1/threat-assessment:
     post:
+      operationId: do_threat_assessment
       summary: Perform a threat assessment
       description: Accepts a threat assessment request and returns a threat assessment response.
       requestBody:

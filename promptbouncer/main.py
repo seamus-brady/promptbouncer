@@ -14,6 +14,7 @@ import yaml  # noqa
 from fastapi import FastAPI
 from starlette.responses import HTMLResponse
 
+from promptbouncer.api.entities import ThreatAssessmentResponse, Threat, ThreatAssessmentRequest
 from promptbouncer.exceptions.api_exception import APIException
 from promptbouncer.util.file_path_util import FilePathUtil
 
@@ -54,9 +55,21 @@ def get_root():
     return HTMLResponse(content=html_content)
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+@app.post("v1/threat-assessment", response_model=ThreatAssessmentResponse)
+def do_threat_assessment(request: ThreatAssessmentRequest):
+    # Mock implementation for the purpose of this example
+    threats = [
+        Threat(name="Threat A", importance=7, magnitude=9),
+        Threat(name="Threat B", importance=5, magnitude=6)
+    ]
+    assessment_score = 85.5  # This should be calculated based on the input request
+    assessment_description = "High risk due to multiple severe threats."
+
+    return ThreatAssessmentResponse(
+        threats=threats,
+        assessment_score=assessment_score,
+        assessment_description=assessment_description
+    )
 
 
 if __name__ == "__main__":
