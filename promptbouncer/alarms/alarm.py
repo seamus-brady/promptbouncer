@@ -7,8 +7,22 @@
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-"""Config settings associated with the API"""
+#
+#
+from dataclasses import dataclass
 
-OPEN_API_YAML_SPEC_FILE = "config/openapi_spec.yaml"
-PROMPT_BOUNCER_LOG_DIR = "logs"
-DEFAULT_OPENAI_MODEL = "gpt-4o"
+
+@dataclass(frozen=True)
+class Alarm:
+    """
+    Represents one alarm in the system.
+    """
+
+    THREAT_CRITICAL = 3
+    THREAT_SERIOUS = 2
+    THREAT_MODERATE = 1
+
+    threat_level: int
+    threat_details: str
+    threat_scanner_name: str
+    threat_scanner_description: str

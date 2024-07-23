@@ -2,10 +2,13 @@ bandit
 black
 fastapi
 flake8
+instructor
 invoke
 isort
+litellm
 mypy
 python-dotenv
+openai_function_tokens
 starlette
 uvicorn
 types-PyYAML

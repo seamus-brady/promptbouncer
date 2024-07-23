@@ -7,8 +7,24 @@
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-"""Config settings associated with the API"""
+#
+from abc import ABC
+from typing import Any
 
-OPEN_API_YAML_SPEC_FILE = "config/openapi_spec.yaml"
-PROMPT_BOUNCER_LOG_DIR = "logs"
-DEFAULT_OPENAI_MODEL = "gpt-4o"
+from promptbouncer.llm.llm_facade import LLM
+
+
+class AbstractThreatScanner(ABC):
+    """Abstract parent class for all threat scanners."""
+
+    @staticmethod
+    def scan(prompt: str) -> Any:
+        raise NotImplementedError
+
+    @staticmethod
+    def is_filtered(prompt: str) -> bool:
+        """Checks to see if a message has been filtered by the LLM"""
+        if prompt is not None and prompt.__contains__(LLM.ERROR_FILTERED):
+            return True
+        else:
+            return False

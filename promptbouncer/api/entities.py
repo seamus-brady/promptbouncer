@@ -8,6 +8,7 @@
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 from typing import List, Optional
+
 from pydantic import BaseModel
 
 

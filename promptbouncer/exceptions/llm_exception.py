@@ -7,8 +7,11 @@
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-"""Config settings associated with the API"""
+#
+#
+class LLMException(Exception):
+    """Raise an exception when calling an LLM"""
 
-OPEN_API_YAML_SPEC_FILE = "config/openapi_spec.yaml"
-PROMPT_BOUNCER_LOG_DIR = "logs"
-DEFAULT_OPENAI_MODEL = "gpt-4o"
+    def __init__(self, message: str = "An LLM Exception occurred!"):
+        self.message = message
+        super().__init__(self.message)

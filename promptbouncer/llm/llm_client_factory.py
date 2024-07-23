@@ -6,9 +6,23 @@
 #  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+from promptbouncer.exceptions.llm_exception import LLMException
+#
+#
+#
+#
+from promptbouncer.llm.clients.openai import OpenAIClient
+from promptbouncer.llm.llm_client import LLMClient
 
-"""Config settings associated with the API"""
 
-OPEN_API_YAML_SPEC_FILE = "config/openapi_spec.yaml"
-PROMPT_BOUNCER_LOG_DIR = "logs"
-DEFAULT_OPENAI_MODEL = "gpt-4o"
+class LLMClientFactory:
+    """
+    Instantiates the correct LLMClient.
+    """
+
+    @staticmethod
+    def llm_client() -> LLMClient:
+        try:
+            return OpenAIClient()
+        except Exception as error:
+            raise LLMException(str(error))

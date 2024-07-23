@@ -14,7 +14,8 @@ import yaml  # noqa
 from fastapi import FastAPI
 from starlette.responses import HTMLResponse
 
-from promptbouncer.api.entities import ThreatAssessmentResponse, Threat, ThreatAssessmentRequest
+from promptbouncer.api.entities import (Threat, ThreatAssessmentRequest,
+                                        ThreatAssessmentResponse)
 from promptbouncer.exceptions.api_exception import APIException
 from promptbouncer.util.file_path_util import FilePathUtil
 
@@ -55,7 +56,7 @@ def get_root():
     return HTMLResponse(content=html_content)
 
 
-@app.post("v1/threat-assessment", response_model=ThreatAssessmentResponse)
+@app.post("/v1/threat-assessment", response_model=ThreatAssessmentResponse)
 def do_threat_assessment(request: ThreatAssessmentRequest):
     # Mock implementation for the purpose of this example
     threats = [
