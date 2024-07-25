@@ -1,29 +1,27 @@
-#  Copyright (c) 2024 Seamus Brady seamus@ontal.ai, Corvideon Ltd.
+#  Copyright (c) 2024. Prediction By Invention https://predictionbyinvention.com/
 #
-#  The above copyright notice and this permission notice shall be included in
-#  all copies or substantial portions of the Software.
+#  THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+#  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+#  PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+#  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
+#  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
+#  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 #
-#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-#  THE SOFTWARE.
+#
 #
 #
 from typing import Any, List
 
-from src.ontal.core.cognition.forecast.feature import FeatureSet
-from src.ontal.core.cycle.alarms.alarm import Alarm
-from src.ontal.core.llm.llm_facade import LLM
-from src.ontal.core.llm.llm_messages import LLMMessages
-from src.ontal.core.modes.adaptive_request_mode import AdaptiveRequestMode
-from src.ontal.core.scanners.abstract_text_scanner import AbstractTextScanner
-from src.ontal.util.logging_util import LoggingUtil
+from promptbouncer.alarms.alarm import Alarm
+from promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
+from promptbouncer.llm.llm_facade import LLM
+from promptbouncer.llm.llm_messages import LLMMessages
+from promptbouncer.scanners.abstract_scanner import AbstractThreatScanner
+from promptbouncer.util.logging_util import LoggingUtil
 
 
-class PromptLeakageScanner(AbstractTextScanner):
+class PromptLeakageScanner(AbstractThreatScanner):
     """
     A class to check prompt leakage. If the response does contain the canary string, this may indicate
     prompt injection designed to leak the initial instructions/prompt
@@ -32,16 +30,11 @@ class PromptLeakageScanner(AbstractTextScanner):
 
     LOGGER = LoggingUtil.instance("<PromptLeakageScanner>")
 
-    CANARY_STRING: str = "1cbbe75d8cf4a0ce"
+    THREAT_SCANNER_NAME = "PromptLeakageScanner"
+    THREAT_SCANNER_DESC = "This scan is used to check whether information is leaked through the output."
+    THREAT_LEVEL = Alarm.THREAT_CRITICAL
 
-    # prompts leakages are critical
-    ALARM_BASE_IMPORTANCE = Alarm.THREAT_CRITICAL
-
-    FEATURE_SET = FeatureSet(
-        importance=Alarm.THREAT_CRITICAL,
-        name="PromptLeakageScanner",
-        description="This scan is used to check whether information is leaked through the output.",
-    )
+    CANARY_STRING: str = "7bdf48c9e1a2f3c4"
 
     @staticmethod
     def scan(prompt: str) -> List[Alarm]:
@@ -54,20 +47,17 @@ class PromptLeakageScanner(AbstractTextScanner):
                 PromptLeakageScanner.CANARY_STRING
             ) or PromptLeakageScanner.is_filtered(prompt):
                 # we have a leakage
-                scan_result = False
+                scan_result_innocuous = False
             else:
                 # no leakage
-                scan_result = True
+                scan_result_innocuous = True
 
-            if not scan_result:
-                PromptLeakageScanner.LOGGER.debug("Raising alarms...")
-                alarm_magnitude: int = Alarm.get_magnitude_from_probability(1.0)
+            if not scan_result_innocuous:
                 alarm: Alarm = Alarm(
-                    base_importance=PromptLeakageScanner.ALARM_BASE_IMPORTANCE,
-                    name="PromptLeakageScanner",
-                    description=PromptLeakageScanner.FEATURE_SET.description,
-                    magnitude=alarm_magnitude,
-                    feature_set=PromptLeakageScanner.FEATURE_SET,
+                    threat_level=PromptLeakageScanner.THREAT_LEVEL,
+                    threat_details=f"The prompt may be a prompt leakage attack.",
+                    threat_scanner_name=PromptLeakageScanner.THREAT_SCANNER_NAME,
+                    threat_scanner_description=PromptLeakageScanner.THREAT_SCANNER_DESC
                 )
                 alarms_raised.append(alarm)
             return alarms_raised

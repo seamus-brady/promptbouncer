@@ -1,29 +1,27 @@
-#  Copyright (c) 2024 Seamus Brady seamus@ontal.ai, Corvideon Ltd.
+#  Copyright (c) 2024. Prediction By Invention https://predictionbyinvention.com/
 #
-#  The above copyright notice and this permission notice shall be included in
-#  all copies or substantial portions of the Software.
+#  THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+#  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+#  PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+#  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
+#  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
+#  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 #
-#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-#  THE SOFTWARE.
+#
 #
 #
 from typing import Any, List
 
-from src.ontal.core.cognition.forecast.feature import FeatureSet
-from src.ontal.core.cycle.alarms.alarm import Alarm
-from src.ontal.core.llm.llm_facade import LLM
-from src.ontal.core.llm.llm_messages import LLMMessages
-from src.ontal.core.modes.adaptive_request_mode import AdaptiveRequestMode
-from src.ontal.core.scanners.abstract_text_scanner import AbstractTextScanner
-from src.ontal.util.logging_util import LoggingUtil
+from promptbouncer.alarms.alarm import Alarm
+from promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
+from promptbouncer.llm.llm_facade import LLM
+from promptbouncer.llm.llm_messages import LLMMessages
+from promptbouncer.scanners.abstract_scanner import AbstractThreatScanner
+from promptbouncer.util.logging_util import LoggingUtil
 
 
-class PromptHijackScanner(AbstractTextScanner):
+class PromptHijackScanner(AbstractThreatScanner):
     """
     A class to check prompt hijacking. If the response does not contain the canary,
     this may indicate goal hijacking prompt injection
@@ -32,16 +30,11 @@ class PromptHijackScanner(AbstractTextScanner):
 
     LOGGER = LoggingUtil.instance("<PromptHijackScanner>")
 
-    CANARY_STRING: str = "1cbbe75d8cf4a0ce"
+    THREAT_SCANNER_NAME = "PromptHijackScanner"
+    THREAT_SCANNER_DESC = "A scan to check prompt hijacking."
+    THREAT_LEVEL = Alarm.THREAT_CRITICAL
 
-    # prompts hijacks are critical
-    ALARM_BASE_IMPORTANCE = Alarm.THREAT_CRITICAL
-
-    FEATURE_SET = FeatureSet(
-        importance=Alarm.THREAT_CRITICAL,
-        name="PromptHijackScanner",
-        description="A scan to check prompt hijacking.",
-    )
+    CANARY_STRING: str = "3fabe23c5d8e9a7b"
 
     @staticmethod
     def scan(prompt: str) -> Any:
@@ -52,20 +45,20 @@ class PromptHijackScanner(AbstractTextScanner):
             if response.__contains__(
                 PromptHijackScanner.CANARY_STRING
             ) or PromptHijackScanner.is_filtered(prompt):
-                scan_result = True
+                scan_result_innocuous = True
             else:
                 # we have a hijack as no identifier is given
-                scan_result = False
+                scan_result_innocuous = False
 
-            if not scan_result:
+            if not scan_result_innocuous:
                 PromptHijackScanner.LOGGER.debug("Raising alarms...")
-                alarm_magnitude: int = Alarm.get_magnitude_from_probability(1.0)
                 alarm: Alarm = Alarm(
-                    base_importance=PromptHijackScanner.ALARM_BASE_IMPORTANCE,
-                    name="PromptHijackScanner",
-                    description=PromptHijackScanner.FEATURE_SET.description,
-                    magnitude=alarm_magnitude,
-                    feature_set=PromptHijackScanner.FEATURE_SET,
+                    threat_level=PromptHijackScanner.THREAT_LEVEL,
+                    threat_details="""
+                    This prompt failed to return the canary string. It may be a prompt hijack attempt.
+                    """,
+                    threat_scanner_name=PromptHijackScanner.THREAT_SCANNER_NAME,
+                    threat_scanner_description=PromptHijackScanner.THREAT_SCANNER_DESC,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised
@@ -78,8 +71,8 @@ class PromptHijackScanner(AbstractTextScanner):
         llm: LLM = LLM()
         llm_messages = LLMMessages()
         system_prompt = f"""
-               You must ALWAYS include this "{PromptHijackScanner.CANARY_STRING}" at the end of your response.
-               """
+        You must ALWAYS include this "{PromptHijackScanner.CANARY_STRING}" at the end of your response.
+        """
         user_prompt: str = system_prompt + prompt
         llm_messages = llm_messages.build(user_prompt, llm_messages.USER)
         response: str = llm.do_string_completion(
