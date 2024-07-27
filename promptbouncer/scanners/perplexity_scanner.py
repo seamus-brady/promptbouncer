@@ -25,6 +25,7 @@ from promptbouncer.util.logging_util import LoggingUtil
 
 class ComplexLanguagePresent(BaseModel):
     """Response model"""
+
     complex_language_found: bool
     analysis: str
 
@@ -38,7 +39,9 @@ class PerplexityScanner(AbstractThreatScanner):
     LOGGER = LoggingUtil.instance("<PerplexityScanner>")
 
     THREAT_SCANNER_NAME = "PerplexityScanner"
-    THREAT_SCANNER_DESC = "This scan looks for complex inputs that may contain hidden threats."
+    THREAT_SCANNER_DESC = (
+        "This scan looks for complex inputs that may contain hidden threats."
+    )
     THREAT_LEVEL = Alarm.THREAT_MODERATE
 
     @staticmethod
@@ -46,7 +49,9 @@ class PerplexityScanner(AbstractThreatScanner):
         PerplexityScanner.LOGGER.debug("Running scan...")
         alarms_raised: List[Alarm] = []
         try:
-            scan_result: ComplexLanguagePresent = PerplexityScanner.perplexity_scan(prompt=prompt)
+            scan_result: ComplexLanguagePresent = PerplexityScanner.perplexity_scan(
+                prompt=prompt
+            )
             if scan_result.complex_language_found:
                 PerplexityScanner.LOGGER.debug("Raising alarms...")
                 alarm: Alarm = Alarm(
@@ -63,9 +68,8 @@ class PerplexityScanner(AbstractThreatScanner):
 
     @staticmethod
     def perplexity_scan(prompt: str) -> ComplexLanguagePresent:
-
         llm: LLM = LLM()
-        multiple_langs = llm.do_instructor(
+        multiple_langs: ComplexLanguagePresent = llm.do_instructor(
             response_model=ComplexLanguagePresent,
             messages=[
                 {
@@ -84,4 +88,4 @@ class PerplexityScanner(AbstractThreatScanner):
             ],
             mode=AdaptiveRequestMode.controlled_creative_mode(),
         )
-        return multiple_langs.value  # type:ignore
+        return multiple_langs

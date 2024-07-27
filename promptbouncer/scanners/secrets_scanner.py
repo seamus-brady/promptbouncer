@@ -31,7 +31,9 @@ class SecretsScanner(AbstractThreatScanner):
     LOGGER = LoggingUtil.instance("<SecretsScanner>")
 
     THREAT_SCANNER_NAME = "SecretsScanner"
-    THREAT_SCANNER_DESC = "This scan looks for any secrets or sensitive information in a prompt."
+    THREAT_SCANNER_DESC = (
+        "This scan looks for any secrets or sensitive information in a prompt."
+    )
     THREAT_LEVEL = Alarm.THREAT_MODERATE
 
     @staticmethod
@@ -46,7 +48,7 @@ class SecretsScanner(AbstractThreatScanner):
                     threat_level=SecretsScanner.THREAT_LEVEL,
                     threat_details="The prompt may contain sensitive information such as passwords.",
                     threat_scanner_name=SecretsScanner.THREAT_SCANNER_NAME,
-                    threat_scanner_description=SecretsScanner.THREAT_SCANNER_DESC
+                    threat_scanner_description=SecretsScanner.THREAT_SCANNER_DESC,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised

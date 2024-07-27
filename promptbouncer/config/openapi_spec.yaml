@@ -2,14 +2,13 @@ openapi: 3.0.3
 info:
   title: Prompt Bouncer REST API
   description: Get a threat analysis for an incoming LLM Prompt.
-  version: 1.0.0
+  version: 1.1.0
 externalDocs:
   description: Prompt Bouncer Documentation
   url: http://docs.promptbouncer.com/
 paths:
   /v1/threat-assessment:
     post:
-      operationId: do_threat_assessment
       summary: Perform a threat assessment
       description: Accepts a threat assessment request and returns a threat assessment response.
       requestBody:
@@ -68,22 +67,19 @@ components:
       properties:
         name:
           type: string
-          example: "Scanner A"
-        importance:
-          type: integer
-          example: 5
-        magnitude:
-          type: integer
-          example: 10
+          example: "PromptHijackScanner"
     Threat:
       type: object
       properties:
-        name:
+        threat_scan:
           type: string
-          example: "Threat A"
-        importance:
-          type: integer
-          example: 7
-        magnitude:
-          type: integer
-          example: 9
+          example: "PromptHijackScanner"
+        threat_scan_description:
+          type: string
+          example: "A scan to check prompt hijacking."
+        threat_level:
+          type: string
+          example: "Critical"
+        threat_details:
+          type: string
+          example: "There seems to an attempt to hijack the prompt."

@@ -31,7 +31,9 @@ class PromptLeakageScanner(AbstractThreatScanner):
     LOGGER = LoggingUtil.instance("<PromptLeakageScanner>")
 
     THREAT_SCANNER_NAME = "PromptLeakageScanner"
-    THREAT_SCANNER_DESC = "This scan is used to check whether information is leaked through the output."
+    THREAT_SCANNER_DESC = (
+        "This scan is used to check whether information is leaked through the output."
+    )
     THREAT_LEVEL = Alarm.THREAT_CRITICAL
 
     CANARY_STRING: str = "7bdf48c9e1a2f3c4"
@@ -55,9 +57,9 @@ class PromptLeakageScanner(AbstractThreatScanner):
             if not scan_result_innocuous:
                 alarm: Alarm = Alarm(
                     threat_level=PromptLeakageScanner.THREAT_LEVEL,
-                    threat_details=f"The prompt may be a prompt leakage attack.",
+                    threat_details="The prompt may be a prompt leakage attack.",
                     threat_scanner_name=PromptLeakageScanner.THREAT_SCANNER_NAME,
-                    threat_scanner_description=PromptLeakageScanner.THREAT_SCANNER_DESC
+                    threat_scanner_description=PromptLeakageScanner.THREAT_SCANNER_DESC,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised

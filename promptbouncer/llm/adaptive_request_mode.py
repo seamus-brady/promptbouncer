@@ -42,7 +42,7 @@ class AdaptiveRequestMode:
     DEFAULT_PRESENCE_PENALTY: Optional[float] = 0
     DEFAULT_FREQUENCY_PENALTY: Optional[float] = 0
 
-    def __init__(self, mode: AdaptiveRequestMode.Mode = None) -> None:
+    def __init__(self, mode: AdaptiveRequestMode.Mode = None) -> None:  # type: ignore
         self._mode: AdaptiveRequestMode.Mode = mode
         if self.mode is not None:
             self.init_mode()
@@ -101,28 +101,28 @@ class AdaptiveRequestMode:
             if self.mode == AdaptiveRequestMode.Mode.PRECISION_MODE:
                 self._temperature = 0.2  # type: ignore[no-redef]
                 self._top_p = 0.1  # type: ignore[no-redef]
-                self._max_tokens = self.DEFAULT_MAX_TOKENS  # type: ignore[no-redef]
+                self._max_tokens: Optional[int] = self.DEFAULT_MAX_TOKENS  # type: ignore
 
             # Low Temperature with High Top_p
             if self.mode == AdaptiveRequestMode.Mode.CONTROLLED_CREATIVE_MODE:
                 self._temperature: float = 0.2  # type: ignore[no-redef]
                 self._top_p: float = 0.9  # type: ignore[no-redef]
-                self._max_tokens: int = self.DEFAULT_MAX_TOKENS  # type: ignore[no-redef]
+                self._max_tokens: Optional[int] = self.DEFAULT_MAX_TOKENS  # type: ignore
 
             # High Temperature with Low Top_p
             if self.mode == AdaptiveRequestMode.Mode.DYNAMIC_FOCUSED_MODE:
                 self._temperature: float = 0.9  # type: ignore[no-redef]
                 self._top_p: float = 0.2  # type: ignore[no-redef]
-                self._max_tokens: int = self.DEFAULT_MAX_TOKENS  # type: ignore[no-redef]
+                self._max_tokens: Optional[int] = self.DEFAULT_MAX_TOKENS  # type: ignore
 
             # High Temperature with High Top_p
             if self.mode == AdaptiveRequestMode.Mode.EXPLORATORY_MODE:
                 self._temperature: float = 0.9  # type: ignore[no-redef]
                 self._top_p: float = 0.9  # type: ignore[no-redef]
-                self._max_tokens: int = self.DEFAULT_MAX_TOKENS  # type: ignore[no-redef]
+                self._max_tokens: Optional[int] = self.DEFAULT_MAX_TOKENS  # type: ignore
 
             # moderate temperature and top_p settings
             if self.mode == AdaptiveRequestMode.Mode.BALANCED_MODE:
                 self._temperature: float = 0.5  # type: ignore[no-redef]
                 self._top_p: float = 0.5  # type: ignore[no-redef]
-                self._max_tokens: int = self.DEFAULT_MAX_TOKENS  # type: ignore[no-redef]
+                self._max_tokens: Optional[int] = self.DEFAULT_MAX_TOKENS  # type: ignore

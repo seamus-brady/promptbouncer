@@ -14,26 +14,28 @@ from pydantic import BaseModel
 
 class ThreatScanner(BaseModel):
     """Represents one type of scanner that looks for a specific threat."""
+
     name: str
-    importance: int
-    magnitude: int
 
 
 class ThreatAssessmentRequest(BaseModel):
     """A request to do a threat assessment."""
+
     threat_scanners: Optional[List[ThreatScanner]] = []
     prompt: str
 
 
 class Threat(BaseModel):
     """A threat that was found during a threat assessment."""
-    name: str
-    importance: int
-    magnitude: int
 
+    threat_scan: str
+    threat_scan_description: str
+    threat_level: str
+    threat_details: str
 
 class ThreatAssessmentResponse(BaseModel):
     """A response to a request for a threat assessment."""
+
     threats: Optional[List[Threat]] = []
     assessment_score: float
     assessment_description: str

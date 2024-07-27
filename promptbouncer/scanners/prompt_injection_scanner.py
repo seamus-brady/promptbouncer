@@ -25,6 +25,7 @@ from promptbouncer.util.logging_util import LoggingUtil
 
 class HarmfulPromptPresent(BaseModel):
     """Response model"""
+
     is_harmful_prompt: bool
     analysis: str
 
@@ -46,14 +47,16 @@ class PromptInjectionScanner(AbstractThreatScanner):
         PromptInjectionScanner.LOGGER.debug("Running scan...")
         alarms_raised: List[Alarm] = []
         try:
-            scan_result: HarmfulPromptPresent = PromptInjectionScanner.content_scan(prompt)
+            scan_result: HarmfulPromptPresent = PromptInjectionScanner.content_scan(
+                prompt
+            )
             if scan_result.is_harmful_prompt:
                 PromptInjectionScanner.LOGGER.debug("Raising alarms...")
                 alarm: Alarm = Alarm(
                     threat_level=PromptInjectionScanner.THREAT_LEVEL,
                     threat_details=f"The prompt may contain adversarial elements. Analysis: {scan_result.analysis}",
                     threat_scanner_name=PromptInjectionScanner.THREAT_SCANNER_NAME,
-                    threat_scanner_description=PromptInjectionScanner.THREAT_SCANNER_DESC
+                    threat_scanner_description=PromptInjectionScanner.THREAT_SCANNER_DESC,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised
@@ -64,7 +67,7 @@ class PromptInjectionScanner(AbstractThreatScanner):
     @staticmethod
     def content_scan(prompt: str) -> HarmfulPromptPresent:
         llm: LLM = LLM()
-        moderation = llm.do_instructor(
+        moderation: HarmfulPromptPresent = llm.do_instructor(
             response_model=HarmfulPromptPresent,
             messages=[
                 {

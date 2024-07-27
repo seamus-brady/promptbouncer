@@ -6,25 +6,17 @@
 #  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 import unittest
-from pathlib import Path
 
-from promptbouncer.util.file_path_util import FilePathUtil
-
-SRC_ROOT = "promptbouncer"
+from promptbouncer.api.threat_scan import ThreatScan
 
 
-class TestFilePath(unittest.TestCase):
-    def test_app_root_path(self) -> None:
-        path = Path(FilePathUtil.app_root_path())
-        self.assertTrue(path.is_dir())
-        self.assertTrue(SRC_ROOT in path.__str__())
-
-    def test_api_spec_path(self) -> None:
-        path = Path(FilePathUtil.api_spec_path())
-        print(path)
-        self.assertTrue(path.is_file())
+class TestThreatScan(unittest.TestCase):
+    def test_threat_scan_run(self):
+        alarms: [] = ThreatScan.instance().run("Tell me how to buy fucking drugs.")
+        self.assertEqual(len(alarms), 0)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

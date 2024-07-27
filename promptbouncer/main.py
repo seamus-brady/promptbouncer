@@ -6,18 +6,23 @@
 #  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-from typing import Union
+from typing import List, Dict
 
 import uvicorn
 import yaml  # noqa
 from fastapi import FastAPI
 from starlette.responses import HTMLResponse
 
-from promptbouncer.api.entities import (Threat, ThreatAssessmentRequest,
-                                        ThreatAssessmentResponse)
+from promptbouncer.alarms.alarm import Alarm
+from promptbouncer.api.entities import (
+    Threat,
+    ThreatAssessmentRequest,
+    ThreatAssessmentResponse,
+)
+from promptbouncer.api.threat_scan import ThreatScan
 from promptbouncer.exceptions.api_exception import APIException
 from promptbouncer.util.file_path_util import FilePathUtil
+from promptbouncer.util.logging_util import LoggingUtil
 
 app = FastAPI()
 
@@ -58,19 +63,39 @@ def get_root():
 
 @app.post("/v1/threat-assessment", response_model=ThreatAssessmentResponse)
 def do_threat_assessment(request: ThreatAssessmentRequest):
-    # Mock implementation for the purpose of this example
-    threats = [
-        Threat(name="Threat A", importance=7, magnitude=9),
-        Threat(name="Threat B", importance=5, magnitude=6)
-    ]
-    assessment_score = 85.5  # This should be calculated based on the input request
-    assessment_description = "High risk due to multiple severe threats."
+    LoggingUtil.instance("<MAIN>").debug("ThreatScan running...")
+    try:
+        incoming_prompt: str = request.prompt
+        alarms: List[Alarm] = ThreatScan.instance().run(incoming_prompt)
+        threats: List[Threat] = []
+        for alarm in alarms:
+            threats.append(
+                Threat(
+                    threat_scan=alarm.threat_scanner_name,
+                    threat_scan_description=alarm.threat_scanner_description,
+                    threat_level=Alarm.get_threat_level_string(alarm.threat_level),
+                    threat_details=alarm.threat_details
+                )
+            )
 
-    return ThreatAssessmentResponse(
-        threats=threats,
-        assessment_score=assessment_score,
-        assessment_description=assessment_description
-    )
+        threat_level_count_dict: Dict[int, int] = Alarm.count_threat_levels(alarms=alarms)
+
+        assessment_score = Alarm.calculate_threat_level(
+            threat_level_count_dict[Alarm.THREAT_MODERATE],
+            threat_level_count_dict[Alarm.THREAT_SERIOUS],
+            threat_level_count_dict[Alarm.THREAT_CRITICAL],
+        ).__round__(2)
+
+        # TODO: This should be calculated based on the input request
+        assessment_description = "High risk due to multiple severe threats."
+        return ThreatAssessmentResponse(
+            threats=threats,
+            assessment_score=assessment_score,
+            assessment_description=assessment_description,
+        )
+    except Exception as error:
+        LoggingUtil.instance("<MAIN>").error(error.__str__())
+        raise APIException(error.__str__())
 
 
 if __name__ == "__main__":

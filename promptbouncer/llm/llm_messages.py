@@ -11,7 +11,7 @@
 #
 #
 #
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, cast
+from typing import TYPE_CHECKING, Any, Dict, List, cast
 
 from openai_function_tokens import estimate_tokens
 
