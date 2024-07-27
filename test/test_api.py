@@ -7,9 +7,26 @@
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-"""Config settings associated with the API"""
+import unittest
 
-OPEN_API_YAML_SPEC_FILE = "config/openapi_spec.yaml"
-PROMPT_BOUNCER_LOG_DIR = "logs"
-DEFAULT_OPENAI_MODEL = "gpt-4o"
-MAX_WORKERS_THREADS: int = 5
+from fastapi.testclient import TestClient
+
+from promptbouncer.main import app
+
+client = TestClient(app)
+
+
+class TestApp(unittest.TestCase):
+    client = TestClient(app)
+
+    def test_root(self):
+        response = client.get("/")
+        self.assertTrue(response.status_code == 200)
+
+    def test_threat_assessment(self):
+        response = client.post("/v1/threat-assessment")
+        self.assertTrue(response.status_code == 422)
+
+
+if __name__ == "__main__":
+    unittest.main()

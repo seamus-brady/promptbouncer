@@ -10,6 +10,7 @@
 #
 
 from __future__ import annotations
+
 from concurrent.futures import Future, ThreadPoolExecutor, wait
 from typing import Any, Dict, List, cast
 
@@ -48,7 +49,7 @@ class ThreatScan:
         "The security filters of the Large Language Model rejected the prompt."
     )
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._threat_scanners: Dict[str, Any] = {
             "CodeScanner": CodeScanner,
             "LanguageDetectionScanner": LanguageDetectionScanner,

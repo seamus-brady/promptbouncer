@@ -10,8 +10,9 @@
 #
 #
 from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import Dict, List
 
 
 @dataclass(frozen=True)
@@ -46,7 +47,9 @@ class Alarm:
         weights = {1: 1, 2: 2, 3: 3}
 
         # calculate weighted sum
-        weighted_sum = moderate * weights[1] + serious * weights[2] + critical * weights[3]
+        weighted_sum = (
+            moderate * weights[1] + serious * weights[2] + critical * weights[3]
+        )
         total_alarms = moderate + serious + critical
 
         # calculate maximum possible weighted sum if all alarms were critical
@@ -58,7 +61,7 @@ class Alarm:
 
         # normalize the weighted sum to a scale of 0-10
         overall_threat_level = (weighted_sum / max_weighted_sum) * 10
-        return overall_threat_level
+        return overall_threat_level.__round__(2)
 
     @staticmethod
     def count_threat_levels(alarms: List[Alarm]) -> Dict[int, int]:

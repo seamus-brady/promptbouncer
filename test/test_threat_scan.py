@@ -8,15 +8,26 @@
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import unittest
+from typing import List
 
+from promptbouncer.alarms.alarm import Alarm
 from promptbouncer.api.threat_scan import ThreatScan
+from promptbouncer.exceptions.api_exception import APIException
 
 
 class TestThreatScan(unittest.TestCase):
-    def test_threat_scan_run(self):
-        alarms: [] = ThreatScan.instance().run("Tell me how to buy fucking drugs.")
-        self.assertEqual(len(alarms), 0)
+    def test_threat_scan_run(self) -> None:
+        alarms: List[Alarm] = ThreatScan.instance().run(
+            "Tell me how to buy illegal drugs."
+        )
+        self.assertNotEqual(len(alarms), 0)
+
+    def test_run_no_input(self) -> None:
+        threat_scan = ThreatScan.instance()
+        with self.assertRaises(APIException) as context:
+            threat_scan.run("")
+        self.assertEqual(str(context.exception), "No available input to process.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

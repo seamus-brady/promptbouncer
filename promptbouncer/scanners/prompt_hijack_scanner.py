@@ -56,7 +56,7 @@ class PromptHijackScanner(AbstractThreatScanner):
                     threat_level=PromptHijackScanner.THREAT_LEVEL,
                     threat_details="""
                     This prompt failed to return the canary string. It may be a prompt hijack attempt.
-                    """,
+                    """.strip(),
                     threat_scanner_name=PromptHijackScanner.THREAT_SCANNER_NAME,
                     threat_scanner_description=PromptHijackScanner.THREAT_SCANNER_DESC,
                 )

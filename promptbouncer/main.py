@@ -6,7 +6,7 @@
 #  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-from typing import List, Dict
+from typing import Dict, List
 
 import uvicorn
 import yaml  # noqa
@@ -74,17 +74,19 @@ def do_threat_assessment(request: ThreatAssessmentRequest):
                     threat_scan=alarm.threat_scanner_name,
                     threat_scan_description=alarm.threat_scanner_description,
                     threat_level=Alarm.get_threat_level_string(alarm.threat_level),
-                    threat_details=alarm.threat_details
+                    threat_details=alarm.threat_details,
                 )
             )
 
-        threat_level_count_dict: Dict[int, int] = Alarm.count_threat_levels(alarms=alarms)
+        threat_level_count_dict: Dict[int, int] = Alarm.count_threat_levels(
+            alarms=alarms
+        )
 
         assessment_score = Alarm.calculate_threat_level(
             threat_level_count_dict[Alarm.THREAT_MODERATE],
             threat_level_count_dict[Alarm.THREAT_SERIOUS],
             threat_level_count_dict[Alarm.THREAT_CRITICAL],
-        ).__round__(2)
+        )
 
         assessment_description = Alarm.get_threat_description(assessment_score)
         return ThreatAssessmentResponse(
