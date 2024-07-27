@@ -21,7 +21,6 @@ class ThreatScanner(BaseModel):
 class ThreatAssessmentRequest(BaseModel):
     """A request to do a threat assessment."""
 
-    threat_scanners: Optional[List[ThreatScanner]] = []
     prompt: str
 
 
@@ -32,6 +31,7 @@ class Threat(BaseModel):
     threat_scan_description: str
     threat_level: str
     threat_details: str
+
 
 class ThreatAssessmentResponse(BaseModel):
     """A response to a request for a threat assessment."""

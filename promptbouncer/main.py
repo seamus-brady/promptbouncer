@@ -86,8 +86,7 @@ def do_threat_assessment(request: ThreatAssessmentRequest):
             threat_level_count_dict[Alarm.THREAT_CRITICAL],
         ).__round__(2)
 
-        # TODO: This should be calculated based on the input request
-        assessment_description = "High risk due to multiple severe threats."
+        assessment_description = Alarm.get_threat_description(assessment_score)
         return ThreatAssessmentResponse(
             threats=threats,
             assessment_score=assessment_score,

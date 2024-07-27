@@ -43,7 +43,7 @@ class Alarm:
     def calculate_threat_level(moderate: int, serious: int, critical: int) -> float:
         """A weighted sum of all the alarms"""
 
-        weights = {1: 1, 2: 4, 3: 6}
+        weights = {1: 1, 2: 2, 3: 3}
 
         # calculate weighted sum
         weighted_sum = moderate * weights[1] + serious * weights[2] + critical * weights[3]
@@ -71,3 +71,19 @@ class Alarm:
                 counts[threat_level] += 1
 
         return counts
+
+    @staticmethod
+    def get_threat_description(threat_level: float) -> str:
+        """Gets a human-readable threat level"""
+        if threat_level <= 2:
+            return "Low threat level. The situation is under control."
+        elif threat_level <= 4:
+            return "Moderate threat level. There are some concerns."
+        elif threat_level <= 6:
+            return "Elevated threat level. Attention is required."
+        elif threat_level <= 8:
+            return "High threat level. Immediate action is advised."
+        elif threat_level <= 10:
+            return "Critical threat level. Urgent action is needed."
+        else:
+            return "Invalid threat level."

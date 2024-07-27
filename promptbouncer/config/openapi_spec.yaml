@@ -39,10 +39,6 @@ components:
     ThreatAssessmentRequest:
       type: object
       properties:
-        threat_scanners:
-          type: array
-          items:
-            $ref: '#/components/schemas/ThreatScanner'
         prompt:
           type: string
           example: "Analyze potential threats based on the following criteria..."

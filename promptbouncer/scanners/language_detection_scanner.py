@@ -36,7 +36,7 @@ class LanguageDetectionScanner(AbstractThreatScanner):
     LOGGER = LoggingUtil.instance("<LanguageDetectionScanner>")
 
     THREAT_SCANNER_NAME = "LanguageDetectionScanner"
-    THREAT_SCANNER_DESC = "This scan looks fora prompt in multiple languages."
+    THREAT_SCANNER_DESC = "This scan looks for a prompt in multiple languages."
     THREAT_LEVEL = Alarm.THREAT_MODERATE
 
     @staticmethod
