@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ##################################################
 #  Prompt Bouncer docker run script

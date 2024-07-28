@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ##################################################
 #  Prompt Bouncer docker build script
@@ -18,6 +18,9 @@ cd ..
 ##################################################
 #  source the .env file to load environment variables
 ##################################################
-source ./bin/load_env_vars.sh
+cp .env /tmp/pb.env
+set -a
+source /tmp/pb.env || :
+set +a
 
 docker build --build-arg OPENAI_API_KEY="$OPENAI_API_KEY"  -t promptbouncer:latest .
