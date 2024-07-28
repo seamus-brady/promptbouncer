@@ -12,11 +12,11 @@ import yaml  # noqa
 from fastapi import FastAPI
 from starlette.responses import HTMLResponse
 
-from promptbouncer.api.bouncer import Bouncer
-from promptbouncer.api.entities import ThreatAssessment, ThreatAssessmentRequest
-from promptbouncer.exceptions.api_exception import APIException
-from promptbouncer.util.file_path_util import FilePathUtil
-from promptbouncer.util.logging_util import LoggingUtil
+from src.promptbouncer.api.bouncer import Bouncer
+from src.promptbouncer.api.entities import ThreatAssessment, ThreatAssessmentRequest
+from src.promptbouncer.exceptions.api_exception import APIException
+from src.promptbouncer.util.file_path_util import FilePathUtil
+from src.promptbouncer.util.logging_util import LoggingUtil
 
 app = FastAPI()
 
