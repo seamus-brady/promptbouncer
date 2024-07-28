@@ -15,18 +15,15 @@
 import unittest
 from typing import Any, List
 
-from promptbouncer.api.alarm import Alarm
-from promptbouncer.scanners.code_scanner import CodeScanner
-from promptbouncer.scanners.inappropriate_content_scanner import (
-    InappropriateContentScanner,
-)
-from promptbouncer.scanners.language_detection_scanner import LanguageDetectionScanner
-from promptbouncer.scanners.perplexity_scanner import PerplexityScanner
-from promptbouncer.scanners.prompt_hijack_scanner import PromptHijackScanner
-from promptbouncer.scanners.prompt_injection_scanner import PromptInjectionScanner
-from promptbouncer.scanners.prompt_leakage_scanner import PromptLeakageScanner
-from promptbouncer.scanners.secrets_scanner import SecretsScanner
-from promptbouncer.scanners.toxicity_scanner import ToxicityScanner
+from src.promptbouncer import (InappropriateContentScanner,
+                               LanguageDetectionScanner, PerplexityScanner,
+                               PromptHijackScanner, PromptLeakageScanner,
+                               SecretsScanner)
+from src.promptbouncer.api.alarm import Alarm
+from src.promptbouncer.scanners.code_scanner import CodeScanner
+from src.promptbouncer.scanners.prompt_injection_scanner import \
+    PromptInjectionScanner
+from src.promptbouncer.scanners.toxicity_scanner import ToxicityScanner
 
 
 class TestThreatScanners(unittest.TestCase):

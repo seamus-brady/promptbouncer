@@ -9,8 +9,8 @@
 
 import unittest
 
-from promptbouncer.api.bouncer import Bouncer
-from promptbouncer.api.entities import ThreatAssessment
+from src.promptbouncer.api.bouncer import Bouncer
+from src.promptbouncer.api.entities import ThreatAssessment
 
 
 class TestBouncer(unittest.TestCase):

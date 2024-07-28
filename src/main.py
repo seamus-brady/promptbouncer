@@ -7,13 +7,15 @@
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#
 import uvicorn
 import yaml  # noqa
 from fastapi import FastAPI
 from starlette.responses import HTMLResponse
 
 from src.promptbouncer.api.bouncer import Bouncer
-from src.promptbouncer.api.entities import ThreatAssessment, ThreatAssessmentRequest
+from src.promptbouncer.api.entities import (ThreatAssessment,
+                                            ThreatAssessmentRequest)
 from src.promptbouncer.exceptions.api_exception import APIException
 from src.promptbouncer.util.file_path_util import FilePathUtil
 from src.promptbouncer.util.logging_util import LoggingUtil

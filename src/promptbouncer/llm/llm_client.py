@@ -19,9 +19,9 @@ from instructor import Partial
 from litellm import completion as litellm_completion
 from pydantic import BaseModel
 
-from promptbouncer.exceptions.llm_exception import LLMException
-from promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
-from promptbouncer.util.logging_util import LoggingUtil
+from src.promptbouncer.exceptions.llm_exception import LLMException
+from src.promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
+from src.promptbouncer.util.logging_util import LoggingUtil
 
 # based on T in instructor.client.Instructor
 T = TypeVar("T", bound=Union[BaseModel, Iterable, Partial])

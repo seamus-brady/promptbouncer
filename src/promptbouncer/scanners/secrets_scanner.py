@@ -16,11 +16,11 @@ from typing import List
 
 from pydantic import BaseModel
 
-from promptbouncer.api.alarm import Alarm
-from promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
-from promptbouncer.llm.llm_facade import LLM
-from promptbouncer.scanners.abstract_scanner import AbstractThreatScanner
-from promptbouncer.util.logging_util import LoggingUtil
+from src.promptbouncer.api.alarm import Alarm
+from src.promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
+from src.promptbouncer.llm.llm_facade import LLM
+from src.promptbouncer.scanners.abstract_scanner import AbstractThreatScanner
+from src.promptbouncer.util.logging_util import LoggingUtil
 
 
 class SecretsScanner(AbstractThreatScanner):

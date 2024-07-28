@@ -12,11 +12,11 @@ from __future__ import annotations
 from enum import Enum
 from typing import Dict, List
 
-from promptbouncer.api.alarm import Alarm
-from promptbouncer.api.entities import Threat, ThreatAssessment
-from promptbouncer.api.threat_scan import ThreatScan
-from promptbouncer.exceptions.api_exception import APIException
-from promptbouncer.util.logging_util import LoggingUtil
+from src.promptbouncer.api.alarm import Alarm
+from src.promptbouncer.api.entities import Threat, ThreatAssessment
+from src.promptbouncer.api.threat_scan import ThreatScan
+from src.promptbouncer.exceptions.api_exception import APIException
+from src.promptbouncer.util.logging_util import LoggingUtil
 
 
 class Bouncer:

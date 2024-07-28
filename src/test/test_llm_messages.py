@@ -14,7 +14,7 @@
 
 import unittest
 
-from promptbouncer.llm.llm_messages import LLMMessages
+from src.promptbouncer.llm.llm_messages import LLMMessages
 
 
 class TestLLMMessages(unittest.TestCase):

@@ -1,18 +1,7 @@
 #!/bin/sh
 
 ##################################################
-#  Prompt Bouncer docker build script
+#  Prompt Bouncer docker run script
 ##################################################
-pwd
 
-##################################################
-#  change to dir of script
-##################################################
-cd "${0%/*}"
-
-##################################################
-#  change to dir of app
-##################################################
-cd ..
-
-docker build -t promptbouncer:latest .
+docker run -d -p 10001:10001 promptbouncer:latest

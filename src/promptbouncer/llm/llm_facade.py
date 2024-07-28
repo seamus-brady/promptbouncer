@@ -14,11 +14,11 @@
 
 from typing import Any, Dict, List, Type
 
-from promptbouncer.exceptions.llm_exception import LLMException
-from promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
-from promptbouncer.llm.llm_client import LLMClient, T
-from promptbouncer.llm.llm_client_factory import LLMClientFactory
-from promptbouncer.util.logging_util import LoggingUtil
+from src.promptbouncer.exceptions.llm_exception import LLMException
+from src.promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
+from src.promptbouncer.llm.llm_client import LLMClient, T
+from src.promptbouncer.llm.llm_client_factory import LLMClientFactory
+from src.promptbouncer.util.logging_util import LoggingUtil
 
 
 class LLM:

@@ -15,9 +15,9 @@ import os
 
 from dotenv import load_dotenv
 
-from promptbouncer.config.api import DEFAULT_OPENAI_MODEL
-from promptbouncer.llm.llm_client import LLMClient
-from promptbouncer.util.logging_util import LoggingUtil
+from src.promptbouncer.config.api import DEFAULT_OPENAI_MODEL
+from src.promptbouncer.llm.llm_client import LLMClient
+from src.promptbouncer.util.logging_util import LoggingUtil
 
 # take environment variables from .env.
 load_dotenv()

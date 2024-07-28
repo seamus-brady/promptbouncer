@@ -11,7 +11,7 @@
 from abc import ABC
 from typing import Any
 
-from promptbouncer.llm.llm_facade import LLM
+from src.promptbouncer.llm.llm_facade import LLM
 
 
 class AbstractThreatScanner(ABC):

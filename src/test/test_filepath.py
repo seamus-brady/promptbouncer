@@ -9,7 +9,7 @@
 import unittest
 from pathlib import Path
 
-from promptbouncer.util.file_path_util import FilePathUtil
+from src.promptbouncer.util.file_path_util import FilePathUtil
 
 SRC_ROOT = "promptbouncer"
 

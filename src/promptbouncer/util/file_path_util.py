@@ -10,7 +10,7 @@
 import os
 from pathlib import Path
 
-from promptbouncer.config.api import OPEN_API_YAML_SPEC_FILE
+from src.promptbouncer.config.api import OPEN_API_YAML_SPEC_FILE
 
 
 class FilePathUtil:

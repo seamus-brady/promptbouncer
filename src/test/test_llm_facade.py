@@ -16,8 +16,8 @@ import unittest
 
 from dotenv import load_dotenv
 
-from promptbouncer.llm.llm_facade import LLM
-from promptbouncer.llm.llm_messages import LLMMessages
+from src.promptbouncer.llm.llm_facade import LLM
+from src.promptbouncer.llm.llm_messages import LLMMessages
 
 load_dotenv()
 

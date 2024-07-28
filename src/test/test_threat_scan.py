@@ -10,9 +10,9 @@
 import unittest
 from typing import List
 
-from promptbouncer.api.alarm import Alarm
-from promptbouncer.api.threat_scan import ThreatScan
-from promptbouncer.exceptions.api_exception import APIException
+from src.promptbouncer.api.alarm import Alarm
+from src.promptbouncer.api.threat_scan import ThreatScan
+from src.promptbouncer.exceptions.api_exception import APIException
 
 
 class TestThreatScan(unittest.TestCase):

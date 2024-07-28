@@ -9,7 +9,7 @@
 
 import unittest
 
-from promptbouncer.api.bouncer import Bouncer
+from src.promptbouncer.api.bouncer import Bouncer
 
 
 class TestBouncerEnum(unittest.TestCase):

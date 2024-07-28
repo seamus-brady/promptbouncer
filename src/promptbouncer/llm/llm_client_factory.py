@@ -6,14 +6,13 @@
 #  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-from promptbouncer.exceptions.llm_exception import LLMException
-
+from src.promptbouncer.exceptions.llm_exception import LLMException
 #
 #
 #
 #
-from promptbouncer.llm.clients.openai import OpenAIClient
-from promptbouncer.llm.llm_client import LLMClient
+from src.promptbouncer.llm.clients.openai import OpenAIClient
+from src.promptbouncer.llm.llm_client import LLMClient
 
 
 class LLMClientFactory:

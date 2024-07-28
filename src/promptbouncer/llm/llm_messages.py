@@ -15,8 +15,8 @@ from typing import TYPE_CHECKING, Any, Dict, List, cast
 
 from openai_function_tokens import estimate_tokens
 
-from promptbouncer.exceptions.llm_exception import LLMException
-from promptbouncer.util.logging_util import LoggingUtil
+from src.promptbouncer.exceptions.llm_exception import LLMException
+from src.promptbouncer.util.logging_util import LoggingUtil
 
 if TYPE_CHECKING:
     from typing import Self

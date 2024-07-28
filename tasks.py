@@ -10,8 +10,8 @@
 
 from invoke import task
 
-SRC_ROOT = "./promptbouncer/"
-TEST_ROOT = "./test/"
+SRC_ROOT = "src/promptbouncer/"
+TEST_ROOT = "src/test/"
 
 
 @task

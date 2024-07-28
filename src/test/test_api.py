@@ -11,7 +11,7 @@ import unittest
 
 from fastapi.testclient import TestClient
 
-from promptbouncer.main import app
+from src.main import app
 
 client = TestClient(app)
 
