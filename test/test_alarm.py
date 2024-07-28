@@ -8,7 +8,7 @@
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import unittest
 
-from promptbouncer.alarms.alarm import Alarm
+from promptbouncer.api.alarm import Alarm
 
 
 class TestAlarm(unittest.TestCase):

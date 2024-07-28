@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Prompt Bouncer REST API
   description: Get a threat analysis for an incoming LLM Prompt.
-  version: 1.1.0
+  version: 1.2.0
 externalDocs:
   description: Prompt Bouncer Documentation
   url: http://docs.promptbouncer.com/
@@ -23,7 +23,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThreatAssessmentResponse'
+                $ref: '#/components/schemas/ThreatAssessment'
         '400':
           description: Invalid request.
           content:
@@ -44,7 +44,7 @@ components:
           example: "Analyze potential threats based on the following criteria..."
       required:
         - prompt
-    ThreatAssessmentResponse:
+    ThreatAssessment:
       type: object
       properties:
         threats:
@@ -54,10 +54,17 @@ components:
         assessment_score:
           type: number
           format: float
-          example: 85.5
+          example: 6.7
         assessment_description:
           type: string
-          example: "High risk due to multiple severe threats."
+          example: "Elevated threat level. Attention is required."
+        recommendation:
+           type: string
+           description: A recommendation from the bouncer.
+           enum:
+             - FRISK
+             - TURN_AWAY
+             - LET_THROUGH
     ThreatScanner:
       type: object
       properties:

@@ -15,7 +15,7 @@
 import unittest
 from typing import Any, List
 
-from promptbouncer.alarms.alarm import Alarm
+from promptbouncer.api.alarm import Alarm
 from promptbouncer.scanners.code_scanner import CodeScanner
 from promptbouncer.scanners.inappropriate_content_scanner import (
     InappropriateContentScanner,

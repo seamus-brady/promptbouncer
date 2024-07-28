@@ -14,7 +14,7 @@ from __future__ import annotations
 from concurrent.futures import Future, ThreadPoolExecutor, wait
 from typing import Any, Dict, List, cast
 
-from promptbouncer.alarms.alarm import Alarm
+from promptbouncer.api.alarm import Alarm
 from promptbouncer.config.api import MAX_WORKERS_THREADS
 from promptbouncer.exceptions.api_exception import APIException
 from promptbouncer.llm.llm_facade import LLM

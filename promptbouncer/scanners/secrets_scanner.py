@@ -16,7 +16,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from promptbouncer.alarms.alarm import Alarm
+from promptbouncer.api.alarm import Alarm
 from promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
 from promptbouncer.llm.llm_facade import LLM
 from promptbouncer.scanners.abstract_scanner import AbstractThreatScanner

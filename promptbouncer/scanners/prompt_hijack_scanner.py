@@ -13,7 +13,7 @@
 #
 from typing import Any, List
 
-from promptbouncer.alarms.alarm import Alarm
+from promptbouncer.api.alarm import Alarm
 from promptbouncer.llm.adaptive_request_mode import AdaptiveRequestMode
 from promptbouncer.llm.llm_facade import LLM
 from promptbouncer.llm.llm_messages import LLMMessages

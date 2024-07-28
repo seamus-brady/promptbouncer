@@ -33,9 +33,10 @@ class Threat(BaseModel):
     threat_details: str
 
 
-class ThreatAssessmentResponse(BaseModel):
+class ThreatAssessment(BaseModel):
     """A response to a request for a threat assessment."""
 
     threats: Optional[List[Threat]] = []
     assessment_score: float
     assessment_description: str
+    recommendation: str

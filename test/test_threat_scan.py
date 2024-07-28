@@ -10,7 +10,7 @@
 import unittest
 from typing import List
 
-from promptbouncer.alarms.alarm import Alarm
+from promptbouncer.api.alarm import Alarm
 from promptbouncer.api.threat_scan import ThreatScan
 from promptbouncer.exceptions.api_exception import APIException
 
