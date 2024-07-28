@@ -14,8 +14,12 @@ from src.promptbouncer.api.bouncer import Bouncer
 
 class TestBouncerEnum(unittest.TestCase):
     def test_low_threat_level(self):
-        self.assertEqual(Bouncer.get_recommendation(1.0), Bouncer.Recommendation.LET_THROUGH)
-        self.assertEqual(Bouncer.get_recommendation(2.0), Bouncer.Recommendation.LET_THROUGH)
+        self.assertEqual(
+            Bouncer.get_recommendation(1.0), Bouncer.Recommendation.LET_THROUGH
+        )
+        self.assertEqual(
+            Bouncer.get_recommendation(2.0), Bouncer.Recommendation.LET_THROUGH
+        )
 
     def test_moderate_threat_level(self):
         self.assertEqual(Bouncer.get_recommendation(3.0), Bouncer.Recommendation.FRISK)
@@ -26,17 +30,25 @@ class TestBouncerEnum(unittest.TestCase):
         self.assertEqual(Bouncer.get_recommendation(6.0), Bouncer.Recommendation.FRISK)
 
     def test_high_threat_level(self):
-        self.assertEqual(Bouncer.get_recommendation(7.0), Bouncer.Recommendation.TURN_AWAY)
-        self.assertEqual(Bouncer.get_recommendation(8.0), Bouncer.Recommendation.TURN_AWAY)
+        self.assertEqual(
+            Bouncer.get_recommendation(7.0), Bouncer.Recommendation.TURN_AWAY
+        )
+        self.assertEqual(
+            Bouncer.get_recommendation(8.0), Bouncer.Recommendation.TURN_AWAY
+        )
 
     def test_critical_threat_level(self):
-        self.assertEqual(Bouncer.get_recommendation(9.0), Bouncer.Recommendation.TURN_AWAY)
-        self.assertEqual(Bouncer.get_recommendation(10.0), Bouncer.Recommendation.TURN_AWAY)
+        self.assertEqual(
+            Bouncer.get_recommendation(9.0), Bouncer.Recommendation.TURN_AWAY
+        )
+        self.assertEqual(
+            Bouncer.get_recommendation(10.0), Bouncer.Recommendation.TURN_AWAY
+        )
 
     def test_invalid_threat_level(self):
         with self.assertRaises(ValueError):
             Bouncer.get_recommendation(11.0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

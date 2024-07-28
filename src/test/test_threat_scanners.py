@@ -15,14 +15,19 @@
 import unittest
 from typing import Any, List
 
-from src.promptbouncer import (InappropriateContentScanner,
-                               LanguageDetectionScanner, PerplexityScanner,
-                               PromptHijackScanner, PromptLeakageScanner,
-                               SecretsScanner)
 from src.promptbouncer.api.alarm import Alarm
 from src.promptbouncer.scanners.code_scanner import CodeScanner
-from src.promptbouncer.scanners.prompt_injection_scanner import \
-    PromptInjectionScanner
+from src.promptbouncer.scanners.inappropriate_content_scanner import (
+    InappropriateContentScanner,
+)
+from src.promptbouncer.scanners.language_detection_scanner import (
+    LanguageDetectionScanner,
+)
+from src.promptbouncer.scanners.perplexity_scanner import PerplexityScanner
+from src.promptbouncer.scanners.prompt_hijack_scanner import PromptHijackScanner
+from src.promptbouncer.scanners.prompt_injection_scanner import PromptInjectionScanner
+from src.promptbouncer.scanners.prompt_leakage_scanner import PromptLeakageScanner
+from src.promptbouncer.scanners.secrets_scanner import SecretsScanner
 from src.promptbouncer.scanners.toxicity_scanner import ToxicityScanner
 
 

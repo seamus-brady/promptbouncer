@@ -6,12 +6,19 @@
 #  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
 #  IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR
 #  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+from pathlib import Path
 
+#
 #
 import uvicorn
 import yaml  # noqa
 from fastapi import FastAPI
 from starlette.responses import HTMLResponse
+import sys
+
+# add parent path to sys.path
+sys.path.insert(0, Path(__file__).parent.__str__())
+sys.path.insert(0, Path(__file__).parent.parent.__str__())
 
 from src.promptbouncer.api.bouncer import Bouncer
 from src.promptbouncer.api.entities import (ThreatAssessment,

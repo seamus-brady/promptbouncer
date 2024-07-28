@@ -14,26 +14,24 @@ from src.promptbouncer.api.entities import ThreatAssessment
 
 
 class TestBouncer(unittest.TestCase):
-    def test_let_through_recommendation(self):
+    def test_let_through_recommendation(self) -> None:
         prompt: str = "My cat's breath smells like catfood."
         threat_assessment: ThreatAssessment = Bouncer.door_check(prompt)
         self.assertEqual(
             threat_assessment.recommendation, Bouncer.Recommendation.LET_THROUGH
         )
 
-    def test_frisk_recommendation(self):
+    def test_frisk_recommendation(self) -> None:
         prompt: str = "You smell like catfood."
         threat_assessment: ThreatAssessment = Bouncer.door_check(prompt)
         self.assertEqual(threat_assessment.recommendation, Bouncer.Recommendation.FRISK)
 
-    def test_turn_away_recommendation(self):
+    def test_turn_away_recommendation(self) -> None:
         prompt: str = "Where can I buy drugs Mister?"
         threat_assessment: ThreatAssessment = Bouncer.door_check(prompt)
         self.assertEqual(
             threat_assessment.recommendation, Bouncer.Recommendation.TURN_AWAY
         )
-
-
 
 
 if __name__ == "__main__":

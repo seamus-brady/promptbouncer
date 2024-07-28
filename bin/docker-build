@@ -15,4 +15,9 @@ cd "${0%/*}"
 ##################################################
 cd ..
 
-docker build -t promptbouncer:latest .
+##################################################
+#  source the .env file to load environment variables
+##################################################
+source ./bin/load_env_vars.sh
+
+docker build --build-arg OPENAI_API_KEY="$OPENAI_API_KEY"  -t promptbouncer:latest .
