@@ -11,5 +11,5 @@
 
 OPEN_API_YAML_SPEC_FILE = "config/openapi_spec.yaml"
 PROMPT_BOUNCER_LOG_DIR = "logs"
-DEFAULT_OPENAI_MODEL = "gpt-4o"
+DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
 MAX_WORKERS_THREADS: int = 5
