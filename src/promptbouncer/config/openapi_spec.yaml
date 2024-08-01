@@ -58,6 +58,10 @@ components:
         assessment_description:
           type: string
           example: "Elevated threat level. Attention is required."
+        assessment_confidence:
+          type: number
+          format: float
+          example: 6.7
         recommendation:
            type: string
            description: A recommendation from the bouncer.

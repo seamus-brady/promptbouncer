@@ -33,6 +33,15 @@ class TestAlarm(unittest.TestCase):
         ]
         self.assertEqual(Alarm.count_threat_levels(alarms), {1: 2, 2: 1, 3: 1})
 
+    def test_confidence_calc(self):
+        alarms = [
+            Alarm(1, "Details1", "Scanner1", "Description1", 0.5),
+            Alarm(2, "Details2", "Scanner2", "Description2", 1.0),
+            Alarm(3, "Details3", "Scanner3", "Description3", 6.7),
+            Alarm(1, "Details4", "Scanner4", "Description4", 8.6),
+        ]
+        self.assertEqual(Alarm.calculate_overall_confidence(alarms), 4.46)
+
     def test_get_threat_description(self):
         self.assertEqual(
             Alarm.get_threat_description(1.0),

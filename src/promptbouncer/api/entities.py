@@ -40,4 +40,5 @@ class ThreatAssessment(BaseModel):
     threats: Optional[List[Threat]] = []
     assessment_score: float
     assessment_description: str
+    assessment_confidence: float
     recommendation: str

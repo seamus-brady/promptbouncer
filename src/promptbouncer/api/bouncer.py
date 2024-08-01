@@ -64,10 +64,12 @@ class Bouncer:
             )
 
             assessment_description = Alarm.get_threat_description(assessment_score)
+            assessment_confidence = Alarm.calculate_overall_confidence(alarms)
             return ThreatAssessment(
                 threats=threats,
                 assessment_score=assessment_score,
                 assessment_description=assessment_description,
+                assessment_confidence=assessment_confidence,
                 recommendation=Bouncer.get_recommendation(assessment_score),
             )
         except Exception as error:

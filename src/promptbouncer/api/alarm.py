@@ -68,6 +68,21 @@ class Alarm:
         return overall_threat_level.__round__(2)
 
     @staticmethod
+    def calculate_overall_confidence(alarms: List[Alarm]) -> float:
+        """A weighted average of all the alarm confidence levels"""
+        total_weighted_score = 0
+        total_weight = 0
+
+        for alarm in alarms:
+            weight = Alarm.THREAT_WEIGHTS[alarm.threat_level]
+            total_weighted_score += weight * alarm.confidence
+            total_weight += weight
+
+        overall_confidence = total_weighted_score / total_weight
+
+        return overall_confidence.__round__(2)
+
+    @staticmethod
     def count_threat_levels(alarms: List[Alarm]) -> Dict[int, int]:
         """Count alarms at level n"""
         counts = {1: 0, 2: 0, 3: 0}
