@@ -18,6 +18,13 @@ from src.promptbouncer.scanners.abstract_scanner import AbstractThreatScanner
 from src.promptbouncer.util.logging_util import LoggingUtil
 
 
+class InappropriateContentPresent(BaseModel):
+    """Response model."""
+
+    category: str
+    confidence: float
+
+
 class InappropriateContentScanner(AbstractThreatScanner):
     """Scans for inappropriate content in a prompt."""
 
@@ -34,14 +41,17 @@ class InappropriateContentScanner(AbstractThreatScanner):
         InappropriateContentScanner.LOGGER.debug("Running scan...")
         alarms_raised: List[Alarm] = []
         try:
-            scan_result: str = InappropriateContentScanner.content_scan(prompt)
-            if scan_result != InappropriateContentScanner.NOT_MODERATED:
+            scan_result: InappropriateContentPresent = (
+                InappropriateContentScanner.content_scan(prompt)
+            )
+            if scan_result.category != InappropriateContentScanner.NOT_MODERATED:
                 InappropriateContentScanner.LOGGER.debug("Raising alarms...")
                 alarm: Alarm = Alarm(
                     threat_level=InappropriateContentScanner.THREAT_LEVEL,
-                    threat_details=f"Inappropriate content found in prompt: {scan_result}",
+                    threat_details=f"Inappropriate content found in prompt: {scan_result.category}",
                     threat_scanner_name=InappropriateContentScanner.THREAT_SCANNER_NAME,
                     threat_scanner_description=InappropriateContentScanner.THREAT_SCANNER_DESC,
+                    confidence=scan_result.confidence,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised
@@ -50,12 +60,10 @@ class InappropriateContentScanner(AbstractThreatScanner):
             return alarms_raised
 
     @staticmethod
-    def content_scan(prompt: str) -> str:
-        class InappropriateContentPresent(BaseModel):
-            category: str
+    def content_scan(prompt: str) -> InappropriateContentPresent:
 
         llm: LLM = LLM()
-        moderation = llm.do_instructor(
+        moderation: InappropriateContentPresent = llm.do_instructor(
             response_model=InappropriateContentPresent,
             messages=[
                 {
@@ -109,6 +117,8 @@ class InappropriateContentScanner(AbstractThreatScanner):
                     If the user string does not fall within these categories, is safe and does not need to be moderated, 
                     please answer {InappropriateContentScanner.NOT_MODERATED}.
                     
+                    Also please give a confidence score for your analysis between 0.0 and 1.0.
+                    
                     == START USER STRING ==
                     {prompt}
                     == END USER STRING ==""",
@@ -116,4 +126,4 @@ class InappropriateContentScanner(AbstractThreatScanner):
             ],
             mode=AdaptiveRequestMode.controlled_creative_mode(),
         )
-        return moderation.category  # type:ignore
+        return moderation

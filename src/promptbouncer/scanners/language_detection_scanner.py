@@ -28,6 +28,7 @@ class MultipleLanguagesPresent(BaseModel):
 
     multiple_langs_found: bool
     list_languages_found: str
+    confidence: float
 
 
 class LanguageDetectionScanner(AbstractThreatScanner):
@@ -54,6 +55,7 @@ class LanguageDetectionScanner(AbstractThreatScanner):
                     threat_details=f"Multiple languages found in prompt: {scan_result.list_languages_found}",
                     threat_scanner_name=LanguageDetectionScanner.THREAT_SCANNER_NAME,
                     threat_scanner_description=LanguageDetectionScanner.THREAT_SCANNER_DESC,
+                    confidence=scan_result.confidence,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised
@@ -77,6 +79,7 @@ class LanguageDetectionScanner(AbstractThreatScanner):
                     It is your task to check if are there languages other than English present in this string. 
                     If so, please list the languages detected.
                     If only English is detected, then you can pass back a false value for this check.
+                    Also please give a confidence score for your analysis between 0.0 and 1.0.
                     
                     == START USER STRING ==
                     {prompt}

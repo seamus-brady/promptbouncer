@@ -59,6 +59,8 @@ class PromptHijackScanner(AbstractThreatScanner):
                     """.strip(),
                     threat_scanner_name=PromptHijackScanner.THREAT_SCANNER_NAME,
                     threat_scanner_description=PromptHijackScanner.THREAT_SCANNER_DESC,
+                    # confidence in this scanner is always 100% as the test is binary
+                    confidence=1.0,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised

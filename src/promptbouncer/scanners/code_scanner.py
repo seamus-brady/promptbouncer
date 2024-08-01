@@ -27,6 +27,7 @@ class CodePresent(BaseModel):
 
     code_present: bool
     analysis: str
+    confidence: float
 
 
 class CodeScanner(AbstractThreatScanner):
@@ -56,6 +57,7 @@ class CodeScanner(AbstractThreatScanner):
                     threat_details=f"Code detected in prompt: {scan_result.analysis}",
                     threat_scanner_name=CodeScanner.THREAT_SCANNER_NAME,
                     threat_scanner_description=CodeScanner.THREAT_SCANNER_NAME,
+                    confidence=scan_result.confidence,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised
@@ -80,6 +82,8 @@ class CodeScanner(AbstractThreatScanner):
                        You're given the text for analysis as below. Please assert whether the text contains any 
                        programming language, code or command strings. If you can identify the programming language or
                        any other information, please add in it the analysis.
+                       
+                       Also please give a confidence score for your analysis between 0.0 and 1.0.
 
                        == START USER STRING ==
                        {prompt}

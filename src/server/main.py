@@ -19,6 +19,7 @@ from starlette.responses import HTMLResponse
 # add parent path to sys.path
 sys.path.insert(0, Path(__file__).parent.__str__())
 sys.path.insert(0, Path(__file__).parent.parent.__str__())
+sys.path.insert(0, Path(__file__).parent.parent.parent.__str__())
 
 from src.promptbouncer.api.bouncer import Bouncer
 from src.promptbouncer.api.entities import (ThreatAssessment,

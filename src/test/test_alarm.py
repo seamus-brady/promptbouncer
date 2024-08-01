@@ -26,10 +26,10 @@ class TestAlarm(unittest.TestCase):
 
     def test_count_threat_levels(self):
         alarms = [
-            Alarm(1, "Details1", "Scanner1", "Description1"),
-            Alarm(2, "Details2", "Scanner2", "Description2"),
-            Alarm(3, "Details3", "Scanner3", "Description3"),
-            Alarm(1, "Details4", "Scanner4", "Description4"),
+            Alarm(1, "Details1", "Scanner1", "Description1", 1.0),
+            Alarm(2, "Details2", "Scanner2", "Description2", 1.0),
+            Alarm(3, "Details3", "Scanner3", "Description3", 1.0),
+            Alarm(1, "Details4", "Scanner4", "Description4", 1.0),
         ]
         self.assertEqual(Alarm.count_threat_levels(alarms), {1: 2, 2: 1, 3: 1})
 

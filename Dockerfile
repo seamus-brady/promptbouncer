@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
 COPY src/promptbouncer /app/src/promptbouncer
-COPY server /app/server
+COPY src/server /app/src/server
 COPY bin/promptbouncer-fastapi /app/bin/promptbouncer-fastapi
 
 # Give execution permissions to the script

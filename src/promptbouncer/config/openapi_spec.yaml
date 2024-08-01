@@ -41,7 +41,7 @@ components:
       properties:
         prompt:
           type: string
-          example: "Analyze potential threats based on the following criteria..."
+          example: "What is a cat?"
       required:
         - prompt
     ThreatAssessment:
@@ -86,3 +86,6 @@ components:
         threat_details:
           type: string
           example: "There seems to an attempt to hijack the prompt."
+        confidence:
+          type: float
+          example: 0.8

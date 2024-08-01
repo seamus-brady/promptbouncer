@@ -49,6 +49,7 @@ class Bouncer:
                         threat_scan_description=alarm.threat_scanner_description,
                         threat_level=Alarm.get_threat_level_string(alarm.threat_level),
                         threat_details=alarm.threat_details,
+                        confidence=alarm.confidence,
                     )
                 )
 

@@ -25,10 +25,14 @@ class Alarm:
     THREAT_SERIOUS = 2
     THREAT_MODERATE = 1
 
+    # Dict { THREAT_MODERATE: 1, THREAT_SERIOUS: 2, THREAT_CRITICAL: 3}
+    THREAT_WEIGHTS = {1: 1, 2: 2, 3: 3}
+
     threat_level: int
     threat_details: str
     threat_scanner_name: str
     threat_scanner_description: str
+    confidence: float
 
     @staticmethod
     def get_threat_level_string(threat_level: int) -> str:
@@ -44,11 +48,11 @@ class Alarm:
     def calculate_threat_level(moderate: int, serious: int, critical: int) -> float:
         """A weighted sum of all the alarms"""
 
-        weights = {1: 1, 2: 2, 3: 3}
+        weights = Alarm.THREAT_WEIGHTS
 
         # calculate weighted sum
         weighted_sum = (
-            moderate * weights[1] + serious * weights[2] + critical * weights[3]
+                moderate * weights[1] + serious * weights[2] + critical * weights[3]
         )
         total_alarms = moderate + serious + critical
 

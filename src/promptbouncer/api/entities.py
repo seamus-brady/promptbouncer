@@ -31,6 +31,7 @@ class Threat(BaseModel):
     threat_scan_description: str
     threat_level: str
     threat_details: str
+    confidence: float
 
 
 class ThreatAssessment(BaseModel):

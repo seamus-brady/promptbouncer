@@ -23,6 +23,13 @@ from src.promptbouncer.scanners.abstract_scanner import AbstractThreatScanner
 from src.promptbouncer.util.logging_util import LoggingUtil
 
 
+class SecretsPresent(BaseModel):
+    """Response model."""
+
+    value: bool
+    confidence: float
+
+
 class SecretsScanner(AbstractThreatScanner):
     """
     Scans for any secrets or sensitive information in a prompt.
@@ -41,14 +48,17 @@ class SecretsScanner(AbstractThreatScanner):
         SecretsScanner.LOGGER.debug("Running scan...")
         alarms_raised: List[Alarm] = []
         try:
-            scan_result_secrets_found: bool = SecretsScanner.content_scan(prompt)
-            if scan_result_secrets_found:
+            scan_result_secrets_found: SecretsPresent = SecretsScanner.content_scan(
+                prompt
+            )
+            if scan_result_secrets_found.value:
                 SecretsScanner.LOGGER.debug("Raising alarms...")
                 alarm: Alarm = Alarm(
                     threat_level=SecretsScanner.THREAT_LEVEL,
                     threat_details="The prompt may contain sensitive information such as passwords.",
                     threat_scanner_name=SecretsScanner.THREAT_SCANNER_NAME,
                     threat_scanner_description=SecretsScanner.THREAT_SCANNER_DESC,
+                    confidence=scan_result_secrets_found.confidence,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised
@@ -57,12 +67,9 @@ class SecretsScanner(AbstractThreatScanner):
             return alarms_raised
 
     @staticmethod
-    def content_scan(prompt: str) -> bool:
-        class SecretsPresent(BaseModel):
-            value: bool
-
+    def content_scan(prompt: str) -> SecretsPresent:
         llm: LLM = LLM()
-        moderation = llm.do_instructor(
+        moderation: SecretsPresent = llm.do_instructor(
             response_model=SecretsPresent,
             messages=[
                 {
@@ -75,6 +82,8 @@ class SecretsScanner(AbstractThreatScanner):
                     
                     You're given the text for analysis as below. Please assert whether the text contains any 
                     sensitive information such as passwords, API keys or other such information.
+                    
+                    Also please give a confidence score for your analysis between 0.0 and 1.0.
 
                     == START USER STRING ==
                     {prompt}
@@ -83,4 +92,4 @@ class SecretsScanner(AbstractThreatScanner):
             ],
             mode=AdaptiveRequestMode.controlled_creative_mode(),
         )
-        return moderation.value  # type:ignore
+        return moderation

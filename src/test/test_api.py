@@ -11,7 +11,7 @@ import unittest
 
 from fastapi.testclient import TestClient
 
-from server.main import app
+from src.server.main import app
 
 client = TestClient(app)
 

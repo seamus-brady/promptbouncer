@@ -24,6 +24,7 @@ class ToxicLanguagePresent(BaseModel):
     """Response model."""
 
     category: str
+    confidence: float
 
 
 class ToxicityScanner(AbstractThreatScanner):
@@ -41,14 +42,15 @@ class ToxicityScanner(AbstractThreatScanner):
         ToxicityScanner.LOGGER.debug("Running scan...")
         alarms_raised: List[Alarm] = []
         try:
-            scan_result: str = ToxicityScanner.content_scan(prompt)
-            if scan_result != ToxicityScanner.NOT_MODERATED:
+            scan_result: ToxicLanguagePresent = ToxicityScanner.content_scan(prompt)
+            if scan_result.category != ToxicityScanner.NOT_MODERATED:
                 ToxicityScanner.LOGGER.debug("Raising alarms...")
                 alarm: Alarm = Alarm(
                     threat_level=ToxicityScanner.THREAT_LEVEL,
-                    threat_details=f"The prompt was categorised as: {scan_result}",
+                    threat_details=f"The prompt was categorised as: {scan_result.category}",
                     threat_scanner_name=ToxicityScanner.THREAT_SCANNER_NAME,
                     threat_scanner_description=ToxicityScanner.THREAT_SCANNER_DESC,
+                    confidence=scan_result.confidence,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised
@@ -57,10 +59,10 @@ class ToxicityScanner(AbstractThreatScanner):
             return alarms_raised
 
     @staticmethod
-    def content_scan(prompt: str) -> str:
+    def content_scan(prompt: str) -> ToxicLanguagePresent:
 
         llm: LLM = LLM()
-        moderation = llm.do_instructor(
+        moderation: ToxicLanguagePresent = llm.do_instructor(
             response_model=ToxicLanguagePresent,
             messages=[
                 {
@@ -92,4 +94,4 @@ class ToxicityScanner(AbstractThreatScanner):
             ],
             mode=AdaptiveRequestMode.controlled_creative_mode(),
         )
-        return moderation.category  # type:ignore
+        return moderation
