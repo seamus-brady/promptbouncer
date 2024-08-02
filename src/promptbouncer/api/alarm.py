@@ -48,39 +48,49 @@ class Alarm:
     def calculate_threat_level(moderate: int, serious: int, critical: int) -> float:
         """A weighted sum of all the alarms"""
 
-        weights = Alarm.THREAT_WEIGHTS
+        try:
+            weights = Alarm.THREAT_WEIGHTS
 
-        # calculate weighted sum
-        weighted_sum = (
-                moderate * weights[1] + serious * weights[2] + critical * weights[3]
-        )
-        total_alarms = moderate + serious + critical
+            # calculate weighted sum
+            weighted_sum = (
+                    moderate * weights[1] + serious * weights[2] + critical * weights[3]
+            )
+            total_alarms = moderate + serious + critical
 
-        # calculate maximum possible weighted sum if all alarms were critical
-        max_weighted_sum = total_alarms * weights[3]
+            # calculate maximum possible weighted sum if all alarms were critical
+            max_weighted_sum = total_alarms * weights[3]
 
-        # no alarms
-        if max_weighted_sum == 0:
-            return 0
+            # no alarms
+            if max_weighted_sum == 0:
+                return 0
 
-        # normalize the weighted sum to a scale of 0-10
-        overall_threat_level = (weighted_sum / max_weighted_sum) * 10
-        return overall_threat_level.__round__(2)
+            # normalize the weighted sum to a scale of 0-10
+            overall_threat_level = (weighted_sum / max_weighted_sum) * 10
+            return overall_threat_level.__round__(2)
+        except: # noqa
+            # if there are no threats, return nothing.
+            return 0.0
+
+
 
     @staticmethod
     def calculate_overall_confidence(alarms: List[Alarm]) -> float:
         """A weighted average of all the alarm confidence levels"""
-        total_weighted_score = 0
-        total_weight = 0
+        try:
+            total_weighted_score = 0
+            total_weight = 0
 
-        for alarm in alarms:
-            weight = Alarm.THREAT_WEIGHTS[alarm.threat_level]
-            total_weighted_score += weight * alarm.confidence
-            total_weight += weight
+            for alarm in alarms:
+                weight = Alarm.THREAT_WEIGHTS[alarm.threat_level]
+                total_weighted_score += weight * alarm.confidence
+                total_weight += weight
 
-        overall_confidence = total_weighted_score / total_weight
+            overall_confidence = total_weighted_score / total_weight
 
-        return overall_confidence.__round__(2)
+            return overall_confidence.__round__(2)
+        except: # noqa
+            # if there are no threats, return nothing.
+            return 0.0
 
     @staticmethod
     def count_threat_levels(alarms: List[Alarm]) -> Dict[int, int]:
