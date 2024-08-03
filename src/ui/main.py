@@ -143,7 +143,7 @@ relative_path_icon = get_absolute_image_path(relative_path_icon)
 
 # Set the page configuration, including the page title
 st.set_page_config(
-    page_title="Prompt Bouncer - Threat Assessment API",
+    page_title="Prompt Bouncer - Threat Assessment API Playground",
     page_icon=relative_path_icon,
     layout="wide"
 )
@@ -164,9 +164,11 @@ with col1:
 
 # Display text in the second column
 with col2:
-    st.write("## Threat Assessment API")
-    st.write("Please enter a prompt below, click Submit and the Bouncer will give a threat assessment.")
-    st.markdown("For more details on how to use on Prompt Bouncer, please see the [main website](https://promptbouncer.com).")
+    st.write("## Threat Assessment API Playground")
+    st.markdown(""" 
+    - Enter a prompt below, click Submit and the Bouncer will give a threat assessment.
+    - For more details on how to use on Prompt Bouncer, please see the [main website](https://promptbouncer.com).
+    """)
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -196,8 +198,12 @@ if st.button("Submit"):
         st.write("Please enter a prompt.")
 
 st.markdown("<hr>", unsafe_allow_html=True)
-st.header("DISCLAIMER")
+st.header("Disclaimer and Terms of Use")
 st.write("""
+- This service is from demonstration purposes only. 
+- The API has a rate limit of one query every 10 seconds.
+- No prompts are stored, logged or used for training AI.
+    
 THIS SERVICE IS PROVIDED "AS IS" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. THE AUTHORS OR COPYRIGHT HOLDERS SHALL NOT BE LIABLE FOR ANY CLAIMS, DAMAGES, OR OTHER LIABILITIES, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SERVICE OR THE USE OF, OR OTHER DEALINGS WITH, THE SERVICE.
 """)
 st.markdown("<hr>", unsafe_allow_html=True)
