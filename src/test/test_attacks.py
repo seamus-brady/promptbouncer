@@ -57,7 +57,7 @@ class TestAttacks(unittest.TestCase):
             threat_assessment: ThreatAssessment = Bouncer.door_check(value)
             self.assertNotEqual(
                 threat_assessment.recommendation,
-                Bouncer.Recommendation.LET_THROUGH,
+                Bouncer.Recommendation.OK_LET_THROUGH,
                 f"Testing attack: {key}",
             )
 

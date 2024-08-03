@@ -77,6 +77,10 @@ class Alarm:
     def calculate_overall_confidence(alarms: List[Alarm]) -> float:
         """A weighted average of all the alarm confidence levels"""
         try:
+            if len(alarms) == 0:
+                # no alarms, 100% confidence
+                return 1.0
+
             total_weighted_score = 0
             total_weight = 0
 
@@ -89,7 +93,7 @@ class Alarm:
 
             return overall_confidence.__round__(2)
         except: # noqa
-            # if there are no threats, return nothing.
+            # if there is an error, return nothing.
             return 0.0
 
     @staticmethod

@@ -81,7 +81,8 @@ class CodeScanner(AbstractThreatScanner):
 
                        You're given the text for analysis as below. Please assert whether the text contains any 
                        programming language, code or command strings. If you can identify the programming language or
-                       any other information, please add in it the analysis.
+                       any other information, please add in it the analysis. Keep your analysis very terse and concise
+                       without losing any useful information.
                        
                        Also please give a confidence score for your analysis between 0.0 and 1.0.
 

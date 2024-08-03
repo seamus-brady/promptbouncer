@@ -42,3 +42,4 @@ class ThreatAssessment(BaseModel):
     assessment_description: str
     assessment_confidence: float
     recommendation: str
+    time_taken_seconds: float

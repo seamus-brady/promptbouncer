@@ -66,9 +66,9 @@ components:
            type: string
            description: A recommendation from the bouncer.
            enum:
-             - FRISK
-             - TURN_AWAY
-             - LET_THROUGH
+             - INSPECT_THREATS
+             - STOP_NO_ENTRY
+             - OK_LET_THROUGH
     ThreatScanner:
       type: object
       properties:
@@ -93,3 +93,6 @@ components:
         confidence:
           type: float
           example: 0.8
+        time_taken_seconds:
+          type: float
+          example: 10.2
