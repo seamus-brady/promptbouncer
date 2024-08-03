@@ -41,7 +41,7 @@ components:
       properties:
         prompt:
           type: string
-          example: "Analyze potential threats based on the following criteria..."
+          example: "What is a cat?"
       required:
         - prompt
     ThreatAssessment:
@@ -58,13 +58,17 @@ components:
         assessment_description:
           type: string
           example: "Elevated threat level. Attention is required."
+        assessment_confidence:
+          type: number
+          format: float
+          example: 6.7
         recommendation:
            type: string
            description: A recommendation from the bouncer.
            enum:
-             - FRISK
-             - TURN_AWAY
-             - LET_THROUGH
+             - INSPECT_THREATS
+             - STOP_NO_ENTRY
+             - OK_LET_THROUGH
     ThreatScanner:
       type: object
       properties:
@@ -86,3 +90,9 @@ components:
         threat_details:
           type: string
           example: "There seems to an attempt to hijack the prompt."
+        confidence:
+          type: float
+          example: 0.8
+        time_taken_seconds:
+          type: float
+          example: 10.2

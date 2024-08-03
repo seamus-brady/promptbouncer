@@ -9,6 +9,7 @@
 
 from __future__ import annotations
 
+import time
 from enum import Enum
 from typing import Dict, List
 
@@ -27,9 +28,9 @@ class Bouncer:
     class Recommendation(str, Enum):
         """A recommendation on what to do with a prompt."""
 
-        LET_THROUGH = "LET_THROUGH"
-        FRISK = "FRISK"
-        TURN_AWAY = "TURN_AWAY"
+        OK_LET_THROUGH = "OK_LET_THROUGH"
+        INSPECT_THREATS = "INSPECT_THREATS"
+        STOP_NO_ENTRY = "STOP_NO_ENTRY"
 
     def __init__(self):
         """Not needed."""
@@ -40,6 +41,7 @@ class Bouncer:
         """Does a threat assessment of an incoming prompt. Returns a threat assessment."""
 
         try:
+            start_time: float = time.time()
             alarms: List[Alarm] = ThreatScan.instance().run(incoming_prompt)
             threats: List[Threat] = []
             for alarm in alarms:
@@ -49,6 +51,7 @@ class Bouncer:
                         threat_scan_description=alarm.threat_scanner_description,
                         threat_level=Alarm.get_threat_level_string(alarm.threat_level),
                         threat_details=alarm.threat_details,
+                        confidence=alarm.confidence,
                     )
                 )
 
@@ -63,11 +66,16 @@ class Bouncer:
             )
 
             assessment_description = Alarm.get_threat_description(assessment_score)
+            assessment_confidence = Alarm.calculate_overall_confidence(alarms)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
             return ThreatAssessment(
                 threats=threats,
                 assessment_score=assessment_score,
                 assessment_description=assessment_description,
+                assessment_confidence=assessment_confidence,
                 recommendation=Bouncer.get_recommendation(assessment_score),
+                time_taken_seconds=elapsed_time.__round__(2),
             )
         except Exception as error:
             Bouncer.LOGGER.error(error.__str__())
@@ -76,10 +84,10 @@ class Bouncer:
     @staticmethod
     def get_recommendation(threat_level: float) -> Bouncer.Recommendation:
         if threat_level <= 2:
-            return Bouncer.Recommendation.LET_THROUGH
+            return Bouncer.Recommendation.OK_LET_THROUGH
         elif threat_level <= 6:
-            return Bouncer.Recommendation.FRISK
+            return Bouncer.Recommendation.INSPECT_THREATS
         elif threat_level <= 10:
-            return Bouncer.Recommendation.TURN_AWAY
+            return Bouncer.Recommendation.STOP_NO_ENTRY
         else:
             raise ValueError("Invalid threat level")

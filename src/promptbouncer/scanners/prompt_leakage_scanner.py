@@ -60,6 +60,8 @@ class PromptLeakageScanner(AbstractThreatScanner):
                     threat_details="The prompt may be a prompt leakage attack.",
                     threat_scanner_name=PromptLeakageScanner.THREAT_SCANNER_NAME,
                     threat_scanner_description=PromptLeakageScanner.THREAT_SCANNER_DESC,
+                    # confidence in this scanner is always 100% as the test is binary
+                    confidence=1.0,
                 )
                 alarms_raised.append(alarm)
             return alarms_raised

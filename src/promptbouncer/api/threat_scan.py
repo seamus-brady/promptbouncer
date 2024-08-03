@@ -127,5 +127,6 @@ class ThreatScan:
             threat_details=self.REJECTED_THE_PROMPT,
             threat_scanner_name=self.LANGUAGE_MODEL_FILTER,
             threat_scanner_description=self.REJECTED_THE_PROMPT,
+            confidence=1.0,
         )  # noqa
         return alarm

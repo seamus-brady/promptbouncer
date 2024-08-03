@@ -71,3 +71,9 @@ def api(c):
     print("Running prod FastAPI server for Prompt Bouncer..")
     c.run("cd promptbouncer; uvicorn main:app --port 10001")
 
+
+@task
+def ui(c):
+    print("Running streamlit UI Prompt Bouncer..")
+    c.run("streamlit run ./src/ui/main.py")
+

@@ -10,5 +10,6 @@ mypy
 python-dotenv
 openai_function_tokens
 starlette
+streamlit
 uvicorn
 types-PyYAML

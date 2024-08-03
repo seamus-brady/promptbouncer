@@ -14,7 +14,7 @@ cd "${0%/*}"
 #  change to dir of main.py
 ##################################################
 cd ..
-cd server
+cd src/server
 
 ##################################################
 #  run the server using uvicorn

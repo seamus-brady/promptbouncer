@@ -15,34 +15,34 @@ from src.promptbouncer.api.bouncer import Bouncer
 class TestBouncerEnum(unittest.TestCase):
     def test_low_threat_level(self):
         self.assertEqual(
-            Bouncer.get_recommendation(1.0), Bouncer.Recommendation.LET_THROUGH
+            Bouncer.get_recommendation(1.0), Bouncer.Recommendation.OK_LET_THROUGH
         )
         self.assertEqual(
-            Bouncer.get_recommendation(2.0), Bouncer.Recommendation.LET_THROUGH
+            Bouncer.get_recommendation(2.0), Bouncer.Recommendation.OK_LET_THROUGH
         )
 
     def test_moderate_threat_level(self):
-        self.assertEqual(Bouncer.get_recommendation(3.0), Bouncer.Recommendation.FRISK)
-        self.assertEqual(Bouncer.get_recommendation(4.0), Bouncer.Recommendation.FRISK)
+        self.assertEqual(Bouncer.get_recommendation(3.0), Bouncer.Recommendation.INSPECT_THREATS)
+        self.assertEqual(Bouncer.get_recommendation(4.0), Bouncer.Recommendation.INSPECT_THREATS)
 
     def test_elevated_threat_level(self):
-        self.assertEqual(Bouncer.get_recommendation(5.0), Bouncer.Recommendation.FRISK)
-        self.assertEqual(Bouncer.get_recommendation(6.0), Bouncer.Recommendation.FRISK)
+        self.assertEqual(Bouncer.get_recommendation(5.0), Bouncer.Recommendation.INSPECT_THREATS)
+        self.assertEqual(Bouncer.get_recommendation(6.0), Bouncer.Recommendation.INSPECT_THREATS)
 
     def test_high_threat_level(self):
         self.assertEqual(
-            Bouncer.get_recommendation(7.0), Bouncer.Recommendation.TURN_AWAY
+            Bouncer.get_recommendation(7.0), Bouncer.Recommendation.STOP_NO_ENTRY
         )
         self.assertEqual(
-            Bouncer.get_recommendation(8.0), Bouncer.Recommendation.TURN_AWAY
+            Bouncer.get_recommendation(8.0), Bouncer.Recommendation.STOP_NO_ENTRY
         )
 
     def test_critical_threat_level(self):
         self.assertEqual(
-            Bouncer.get_recommendation(9.0), Bouncer.Recommendation.TURN_AWAY
+            Bouncer.get_recommendation(9.0), Bouncer.Recommendation.STOP_NO_ENTRY
         )
         self.assertEqual(
-            Bouncer.get_recommendation(10.0), Bouncer.Recommendation.TURN_AWAY
+            Bouncer.get_recommendation(10.0), Bouncer.Recommendation.STOP_NO_ENTRY
         )
 
     def test_invalid_threat_level(self):
