@@ -70,7 +70,7 @@ def do_threat_assessment(request: ThreatAssessmentRequest):
     LoggingUtil.instance("<MAIN>").debug("ThreatScan running...")
     try:
         incoming_prompt: str = request.prompt
-        return Bouncer.door_check(incoming_prompt)
+        return Bouncer.do_threat_assessment(incoming_prompt)
     except Exception as error:
         LoggingUtil.instance("<MAIN>").error(error.__str__())
         raise APIException(error.__str__())

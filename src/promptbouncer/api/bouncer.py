@@ -37,7 +37,7 @@ class Bouncer:
         pass
 
     @staticmethod
-    def door_check(incoming_prompt: str) -> ThreatAssessment:
+    def do_threat_assessment(incoming_prompt: str) -> ThreatAssessment:
         """Does a threat assessment of an incoming prompt. Returns a threat assessment."""
 
         try:

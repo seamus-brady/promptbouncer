@@ -61,7 +61,7 @@ def generate_html_table(data: List[dict], width: str = "100%") -> str:
 def do_threat_assessment():
     """Main function to call Prompt Bouncer"""
     try:
-        threat_assessment: ThreatAssessment = Bouncer.door_check(prompt)
+        threat_assessment: ThreatAssessment = Bouncer.do_threat_assessment(prompt)
         st.title("The Bouncer's Threat Assessment Report")
 
         st.header("Assessment Summary")
