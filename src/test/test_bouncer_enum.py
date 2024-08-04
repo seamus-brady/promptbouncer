@@ -22,12 +22,20 @@ class TestBouncerEnum(unittest.TestCase):
         )
 
     def test_moderate_threat_level(self):
-        self.assertEqual(Bouncer.get_recommendation(3.0), Bouncer.Recommendation.INSPECT_THREATS)
-        self.assertEqual(Bouncer.get_recommendation(4.0), Bouncer.Recommendation.INSPECT_THREATS)
+        self.assertEqual(
+            Bouncer.get_recommendation(3.0), Bouncer.Recommendation.INSPECT_THREATS
+        )
+        self.assertEqual(
+            Bouncer.get_recommendation(4.0), Bouncer.Recommendation.INSPECT_THREATS
+        )
 
     def test_elevated_threat_level(self):
-        self.assertEqual(Bouncer.get_recommendation(5.0), Bouncer.Recommendation.INSPECT_THREATS)
-        self.assertEqual(Bouncer.get_recommendation(6.0), Bouncer.Recommendation.INSPECT_THREATS)
+        self.assertEqual(
+            Bouncer.get_recommendation(5.0), Bouncer.Recommendation.INSPECT_THREATS
+        )
+        self.assertEqual(
+            Bouncer.get_recommendation(6.0), Bouncer.Recommendation.INSPECT_THREATS
+        )
 
     def test_high_threat_level(self):
         self.assertEqual(

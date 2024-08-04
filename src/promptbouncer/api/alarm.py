@@ -53,7 +53,7 @@ class Alarm:
 
             # calculate weighted sum
             weighted_sum = (
-                    moderate * weights[1] + serious * weights[2] + critical * weights[3]
+                moderate * weights[1] + serious * weights[2] + critical * weights[3]
             )
             total_alarms = moderate + serious + critical
 
@@ -67,11 +67,9 @@ class Alarm:
             # normalize the weighted sum to a scale of 0-10
             overall_threat_level = (weighted_sum / max_weighted_sum) * 10
             return overall_threat_level.__round__(2)
-        except: # noqa
+        except:  # noqa
             # if there are no threats, return nothing.
             return 0.0
-
-
 
     @staticmethod
     def calculate_overall_confidence(alarms: List[Alarm]) -> float:
@@ -81,18 +79,18 @@ class Alarm:
                 # no alarms, 100% confidence
                 return 1.0
 
-            total_weighted_score = 0
-            total_weight = 0
+            total_weighted_score: float = 0.0
+            total_weight: float = 0.0
 
             for alarm in alarms:
                 weight = Alarm.THREAT_WEIGHTS[alarm.threat_level]
                 total_weighted_score += weight * alarm.confidence
                 total_weight += weight
 
-            overall_confidence = total_weighted_score / total_weight
+            overall_confidence: float = total_weighted_score / total_weight
 
             return overall_confidence.__round__(2)
-        except: # noqa
+        except:  # noqa
             # if there is an error, return nothing.
             return 0.0
 
