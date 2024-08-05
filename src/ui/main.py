@@ -200,7 +200,8 @@ st.markdown("<hr>", unsafe_allow_html=True)
 st.header("Disclaimer and Terms of Use")
 st.write("""
 - This service is from demonstration purposes only. 
-- The API has a rate limit of one query every 10 seconds
+- The API has a rate limit of one query every 10 seconds.
+- No prompts are stored, logged or used for training AI.
     
 THIS SERVICE IS PROVIDED "AS IS" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. THE AUTHORS OR COPYRIGHT HOLDERS SHALL NOT BE LIABLE FOR ANY CLAIMS, DAMAGES, OR OTHER LIABILITIES, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SERVICE OR THE USE OF, OR OTHER DEALINGS WITH, THE SERVICE.
 """)
