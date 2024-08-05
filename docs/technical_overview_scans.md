@@ -1,5 +1,5 @@
 
-# Technical Overview: Parallel Processing for Scans in Prompt Bouncer
+# Technical Overview: Parallel Processing for Scans
 
 ## Introduction
 
