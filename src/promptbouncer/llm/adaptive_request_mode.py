@@ -10,14 +10,13 @@
 
 from __future__ import annotations
 
-from enum import StrEnum
 from typing import Optional
 
 
 class AdaptiveRequestMode:
     """A class to manage and adapt various parameters for LLMs."""
 
-    class Mode(StrEnum):
+    class Mode:
         #  Low Temperature with Low Top_p
         PRECISION_MODE = "Precision Mode"
 
