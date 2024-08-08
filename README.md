@@ -3,7 +3,7 @@
 A first line of defense against prompt-based attacks with real-time threat assessment.
 
 
-![alt text](https://github.com/Prediction-by-Invention/promptbouncer/blob/main/doc/img/promptbouncer-logo-small.png)
+![Prompt Bouncer Logo](https://github.com/Prediction-by-Invention/promptbouncer/blob/main/doc/img/promptbouncer-logo-small.png)
 
 # Overview
 
