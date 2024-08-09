@@ -28,7 +28,7 @@
 
 - Prompt Bouncer should work with any version of Python. `3.8+` but `3.11` is recommended.
 - Prompt Bouncer needs an Open AI key to operate. Internally the `GTP4-o` model is used as it is cheap and fast.
-- Prompt Bouncer does not need a GPU and will work on most shared hosting environmentrs where Python is available, as well as on any cloud provider where Docker is available.
+- Prompt Bouncer does not need a GPU and will work on most shared hosting environments where Python is available, as well as on any cloud provider where Docker is available.
 
 [Back to top](#table-of-contents)
 
