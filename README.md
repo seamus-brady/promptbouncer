@@ -115,8 +115,8 @@ python -m invoke isort     # Import sorting
 ## Documentation
 
 For more detailed information, please see:
-- [Full Documentation](https://github.com/Prediction-by-Invention/promptbouncer/tree/main/doc)
-- [Prompt Bouncer Website](https://promptbouncer.com/about/)
+
+- [Full Documentation](https://github.com/seamus-brady/promptbouncer/tree/main/doc)
 
 ## License
 
