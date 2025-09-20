@@ -1,0 +1,5 @@
+instructor
+litellm
+python-dotenv
+openai_function_tokens
+pydantic
